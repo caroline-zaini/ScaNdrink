@@ -30,15 +30,15 @@ export default function SuiviCommande() {
 
         <View style={{flexDirection:'row'}}>
             <Image      
-            source={require('../assets/001-clock.png')}
+            source={require('../assets/icons/001-clock.png')}
             style={{ width: hp('5%'), height: hp('5%'), marginLeft: wp('20%') }}
             />
             <Image
-            source={require('../assets/002-prepare.png')}
+            source={require('../assets/icons/002-prepare.png')}
             style={{ width: hp('5%'), height: hp('5%'), marginLeft: wp('14%') }}
             />
             <Image
-            source={require('../assets/003-ready.png')}
+            source={require('../assets/icons/003-ready.png')}
             style={{ width: hp('5%'), height: hp('5%'), marginLeft: wp('14%') }}
             />
         </View>
