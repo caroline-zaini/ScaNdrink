@@ -83,7 +83,9 @@ var TopNavigator = createMaterialTopTabNavigator({
         title:'',
         headerStyle: {
           backgroundColor: '#152228',
-        },     
+        },   
+        headerTintColor: '#FFFF',
+        headerBackTitle: '',  
       }
     
     },

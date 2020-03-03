@@ -13,6 +13,19 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function Inscription({navigation}) {
 
 
+    async function sendInfo() {
+       
+      var data = 'coucou'
+
+      var rawResponse = await fetch("http://10.2.5.179:3000/upload", {
+        method: 'POST',
+        body: data
+      })
+
+      var response = await rawResponse.json()
+      
+    }
+
     return (
   
  
@@ -34,6 +47,7 @@ export default function Inscription({navigation}) {
             containerStyle = {{marginBottom: hp('3%'), width: wp('45%')}}
             label='Votre Prénom'
             placeholder=' Prénom'
+
             />
           
             <Input
@@ -90,6 +104,12 @@ export default function Inscription({navigation}) {
           onPress={() => navigation.navigate('MonPaiement')}
          
           />
+          <Button
+          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
+          title="S'INSCRIRE"
+          onPress={async () => sendInfo()}
+         
+          />
          
       
     </View>
@@ -114,7 +134,6 @@ export default function Inscription({navigation}) {
 
  
   
-  // Intégration de la navigation dans l'app :
 
   
   
