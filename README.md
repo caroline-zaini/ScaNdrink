@@ -1,2 +1,4 @@
 # ScaNdrink
+
+git clone 
  
