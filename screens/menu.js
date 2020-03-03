@@ -11,9 +11,7 @@ import Categorie from '../components/Categorie';
 import Produit from '../components/Produit';
 
 
-
-
-export default function Menu({navigation})  {
+function Menu({navigation})  {
 
   var categoriesData = [
     {name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: ['Leffe', 'Desperados', 'Skoll']},
@@ -44,9 +42,9 @@ export default function Menu({navigation})  {
   return (
     <View style={styles.container}>
 
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={{fontSize: 25, marginTop: 25, color: '#fff'}}>Nom du bar</Text>
-      </View>
+      </View> */}
 
       <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.categorieList}>
         {categorieList}
@@ -102,5 +100,4 @@ var styles = StyleSheet.create({
 
 });
 
-
-
+export default Menu;
