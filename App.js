@@ -10,6 +10,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
+import {createStore, combineReducers} from 'redux'
+import {Provider} from 'react-redux'
 
 /**
  * Import the composents
@@ -21,8 +23,10 @@ import Connexion from './screens/connexion'
 import SuiviCommande from './screens/suiviCommande'
 import MonPaiement from './screens/monPaiement'
 
+import token from './reducers/token'
 
 
+const store = createStore(combineReducers({token}));
 
 
 
@@ -116,10 +120,17 @@ var TopNavigator = createMaterialTopTabNavigator({
 
   const Navigation = createAppContainer(StackNavigator);
 
+
+
+
   export default function App() {
     return (
+        <Provider store={store}> 
+
+            <Navigation/>
     
-        <Navigation/>
+        </Provider>
+        
       
     );
    }
