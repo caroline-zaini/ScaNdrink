@@ -7,4 +7,5 @@ git clone https://github.com/MadameZ/ScaNdrink.git
 - npm install react-native-elements
 - npm install react-native-responsive-screen --save
 - npm i react-native-progress-steps
+- npm install --save uid2
  
