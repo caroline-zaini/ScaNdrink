@@ -3,35 +3,52 @@ import { StyleSheet, View, StatusBar, ScrollView } from 'react-native';
 import { connect } from 'react-redux'
 import { Text, Button } from 'react-native-elements';
 
-import Produit from '../components/Produit';
+import ProduitPanier from '../components/ProduitPanier';
+import Bouton from '../components/Bouton';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import colors from '../components/colors';
 
 function Panier(props) {
 
+    var total = 0;
+
+    console.log('props.displayPanier :', props.displayPanier);
+
     var listPanier = props.displayPanier.map((produit, j) => {
-      return <Produit key={j} produitName={produit} />
+      total += produit.price*produit.quantity;
+      return <ProduitPanier key={j} produitName={produit.name} produitQuantity={produit.quantity} produitPrice={produit.price*produit.quantity} />
     })
 
     return (
   
     <View style={{flex:1}}>
        <ScrollView>
+
           <View>
             <StatusBar barStyle="light-content" />
           </View>
   
-          <View style= {{ justifyContent:"center", alignItems:'center', marginTop: hp('4%'), marginBottom:hp('7%') }}>
-              {listPanier}
+          <View style={styles.container}>
+
+            <View style={styles.produitContainer}>
+                {listPanier}
+            </View>
+
+            <View style={styles.totalContainer}>
+              <View style={{width: wp('80%'), paddingLeft: '20%'}}>
+                <Text>Total de votre commande:</Text>
+              </View>
+              <View style={{width: wp('20%')}}>
+                  <Text style={styles.prixProduit}>{total}€</Text>
+              </View>
+            </View>
+         
           </View>
 
-          <Button
-          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
-          title="ETAPE SUIVANTE"
-          onPress={() => props.navigation.navigate('Inscription')}
-          />
-         
-         </ScrollView>
+         <Bouton title='ETAPE SUIVANTE' destination='Inscription' />
+
+        </ScrollView>
       
     </View>
 
@@ -40,12 +57,21 @@ function Panier(props) {
   
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      marginTop:'10%',
-      backgroundColor: '#fff',
+      height: hp('81%'),
+    },
+    produitContainer: {
+      justifyContent: 'center',
+      alignItems:'center',
+      marginTop: hp('4%'),
+      marginBottom:hp('7%'),
+    },
+    totalContainer: {
+      flexDirection: 'row',
+      height: hp('10%'),
+      backgroundColor: colors.tertiary,
       alignItems: 'center',
       justifyContent: 'center',
-    },
+    }
   });
 
   function mapStateToProps(state) {
