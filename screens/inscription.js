@@ -30,8 +30,9 @@ function Inscription({navigation, props}) {
 
       })
 
-      var body = await data.json()
+      var body = await data.json() 
 
+      
       if(body.result == true){
         props.addToken(body.token)
         setUserExists(true)
