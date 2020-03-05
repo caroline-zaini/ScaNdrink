@@ -1,17 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
-
 import {Text, Button } from 'react-native-elements';
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {connect} from 'react-redux'
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-
-
-export default function Inscription({navigation}) {
+function Connexion({navigation}) {
 
   
   const [email, setEmail] = useState('')
@@ -40,8 +37,6 @@ export default function Inscription({navigation}) {
 
 
     return (
-  
-  
   
     <View style={styles.container}>
        
@@ -75,7 +70,7 @@ export default function Inscription({navigation}) {
           </View>
   
           <Button
-          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
+          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), marginTop: hp('4%'), height:hp('6%')}}
           title="SE CONNECTER"
           onPress= {() => {console.log('ic'),sendUserInfo(), navigation.navigate('MonPaiement')}}
           />
@@ -100,13 +95,6 @@ export default function Inscription({navigation}) {
       alignItems:'center', 
       marginTop: hp('4%'), 
       marginBottom:hp('7%')
-    },
-    container: {
-      flex: 1,
-      marginTop:'10%',
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     inputLarge: {
       width: hp('42%'),
