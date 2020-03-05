@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
 
-import { Input, Text, Button } from 'react-native-elements';
+import {Text, Button } from 'react-native-elements';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
@@ -33,31 +33,20 @@ export default function Inscription({navigation}) {
   
           <View style={{marginLeft:hp('2%'), marginRight:hp('2%')}}>
 
-            <Input
-            containerStyle = {{marginBottom: hp('3%'), width: wp('90%')}}
-            label='Votre adresse e-mail'
-            placeholder=' Email'
-            leftIcon={
-              <Icon
-              name='ios-mail'
-              size={24}
-              color='black'
-              />
-            }
+            <TextInput
+             placeholder = "Email"
+             style = {styles.inputLarge}
+             // onChangeText={(value) => setPassword(value)} 
+             // value={password}
             />
 
-            <Input
-            containerStyle = {{width: wp('90%'), marginBottom:hp('8%')}}
-            label='Votre Mot de Passe'
-            secureTextEntry = {true}
-            placeholder=' Mot de Passe'
-            leftIcon={
-              <Icon
-              name='ios-lock'
-              size={24}
-              color='black'
-              />
-            }
+            <TextInput
+            placeholder = "Mot de Passe"
+            style = {styles.inputLarge}
+            // onChangeText={(value) => setPassword(value)} 
+            // value={password}
+            
+            
             />
 
           </View>
@@ -86,4 +75,12 @@ export default function Inscription({navigation}) {
       alignItems: 'center',
       justifyContent: 'center',
     },
+    inputLarge: {
+      width: hp('42%'),
+      height: hp('4%'),
+      marginBottom: hp('3%'),
+      marginRight: hp('2%'),
+      borderBottomColor: 'black',
+      borderBottomWidth:1
+    }
   });
