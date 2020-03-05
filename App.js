@@ -10,8 +10,6 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
-import {createStore, combineReducers} from 'redux'
-import {Provider} from 'react-redux'
 
 /**
  * Import the components

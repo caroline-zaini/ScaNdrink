@@ -42,6 +42,8 @@ function Menu(props)  {
 
   const [produitsData, setProduitsData] = useState(categoriesData[0].produits);
 
+  console.log('props.displayPanier :', props.displayPanier);
+
   var handleClick = (name, produits) => {
     setProduitsData(produits)
   }
