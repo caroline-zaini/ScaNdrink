@@ -4,6 +4,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { Text, Button } from 'react-native-elements';
 import {connect} from 'react-redux'
 
+import Bouton from '../components/Bouton'
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
@@ -19,7 +21,7 @@ function Inscription({navigation, props}) {
     const [password, setPassword] = useState('')
     const [listErrorsSignin, setErrorsSignin] = useState([])
 
-    var sendInfo = async() =>  {
+    var sendUserInfo = async() =>  {
        console.log('la',firstName)
       const data = await fetch("http://10.2.5.179:3000/inscription", {
         method: 'POST',
@@ -104,19 +106,13 @@ function Inscription({navigation, props}) {
           </View>
 
 
-  
           <Button
           buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
           title="S'INSCRIRE"
-          onPress={() => navigation.navigate('MonPaiement')}
+          onPress={() => {console.log('ic'),sendUserInfo(), navigation.navigate('MonPaiement')}}
          
           />
-          <Button
-          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
-          title="S'INSCRIRE"
-          onPress={() => {console.log('ic'),sendInfo()}}
-         
-          />
+
          
       
     </View>
