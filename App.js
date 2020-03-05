@@ -10,6 +10,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
+import {createStore, combineReducers} from 'redux'
+import {Provider} from 'react-redux'
 
 /**
  * Import the components
@@ -26,11 +28,11 @@ import MonPaiement from './screens/monPaiement'
  */
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
+import token from './reducers/token'
 
 import panier from './reducers/panier';
 
-const store = createStore(combineReducers({panier}));
-
+const store = createStore(combineReducers({panier, token}));
 
 var TopNavigator = createMaterialTopTabNavigator({
   Inscription: Inscription,
@@ -86,7 +88,9 @@ var TopNavigator = createMaterialTopTabNavigator({
         title:'',
         headerStyle: {
           backgroundColor: '#152228',
-        },     
+        },   
+        headerTintColor: '#FFFF',
+        headerBackTitle: '',  
       }
     
     },
