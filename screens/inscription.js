@@ -54,23 +54,24 @@ function Inscription({navigation, props}) {
         <StatusBar barStyle="light-content" />
         </View>
 
-        <View style= {{ justifyContent:"center", alignItems:'center', marginTop: hp('4%'), marginBottom:hp('7%')}}>
+        <View style= {{ justifyContent:"center", alignItems:'center', marginTop: hp('4%'), marginBottom:hp('5%')}}>
         <Text style= {{fontSize: 25 }}>Créer mon compte</Text>
         </View >
 
 
-        <View style={{marginLeft:hp('2%'), marginRight:hp('2%')}}>
+        <View style={styles.inputViewGlobal}>
 
             <View style={{flexDirection:'row'}}>
             <TextInput 
               placeholder = "Prénom"
+              style = {styles.inputSmall}
               onChangeText={(value) => setfirstName(value)} 
               value={firstName}
-
             />
           
             <TextInput
               placeholder = "nom"
+              style = {styles.inputSmall}
               onChangeText={(value) => setLastName(value)} 
               value={lastName}
             />
@@ -78,23 +79,27 @@ function Inscription({navigation, props}) {
         
             <TextInput
               placeholder = "email"
+              style = {styles.inputLarge}
+              inlineImageLeft='ios-mail'
               onChangeText={(value) => setEmail(value)} 
               value={email}
             />
         
             <TextInput
               placeholder = "Téléphone"
+              style = {styles.inputLarge}
               onChangeText={(value) => setPhone(value)} 
               value={phone}
             />
           
             <TextInput
             placeholder = "Mot de passe"
+            style = {styles.inputLarge}
             onChange={(value) => setPassword(value)}
             value={password}
            
             />
-
+ 
 
           </View>
 
@@ -132,6 +137,27 @@ function Inscription({navigation, props}) {
       alignItems: 'center',
       justifyContent: 'center',
     },
+    inputViewGlobal: {
+      marginLeft:hp('2%'), 
+      marginRight:hp('2%'), 
+      marginBottom:hp('8%')
+    },
+    inputSmall: {
+      width: hp('20%'),
+      height: hp('4%'),
+      marginBottom: hp('3%'),
+      marginRight: hp('2%'),
+      borderBottomColor: 'black',
+      borderBottomWidth:1
+    },
+    inputLarge: {
+      width: hp('42%'),
+      height: hp('4%'),
+      marginBottom: hp('3%'),
+      marginRight: hp('2%'),
+      borderBottomColor: 'black',
+      borderBottomWidth:1
+    }
   });
 
 
