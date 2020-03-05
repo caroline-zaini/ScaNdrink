@@ -32,9 +32,27 @@ function Menu(props)  {
    },
   ];
 
+  var produitsTwo = [
+    {
+      name: 'Martini',
+      price: 5.50,
+      quantity: 0,
+    },
+    {
+     name: 'Margarita',
+     price: 5,
+     quantity: 0,
+    },
+    {
+     name: 'Cosmopolitain',
+     price: 5.50,
+     quantity: 0,
+    },
+   ];
+
   var categoriesData = [
     {name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: produits},
-    {name: 'Cocktails', img: require(`../assets/images/cocktail.jpg`), produits: ['porto', 'ricain', 'tequila framboise']},
+    {name: 'Cocktails', img: require(`../assets/images/cocktail.jpg`), produits: produitsTwo},
     {name: 'Shooters'},
     {name: 'Softs'},
     {name: 'Vins'}
@@ -42,7 +60,9 @@ function Menu(props)  {
 
   const [produitsData, setProduitsData] = useState(categoriesData[0].produits);
 
-  console.log('props.displayPanier :', props.displayPanier);
+
+  // console.log('produitsDataTT :', produitsData);
+  // console.log('props.displayPanier :', props.displayPanier.quantity);
 
   var handleClick = (name, produits) => {
     setProduitsData(produits)
@@ -56,7 +76,14 @@ function Menu(props)  {
     var produitList = <Text>Aucun produits disponible</Text>
   } else {
     var produitList = produitsData.map((produit, j) => {
-      return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={produit.quantity} displayQuantity={props.displayPanier.quantity} />
+
+      var quantite = 0;
+      for (let i = 0; i < props.displayPanier.length; i++) {
+        if (produit.name == props.displayPanier[i].name && produit.name != undefined)
+          quantite = props.displayPanier[i].quantity;
+      }
+      console.log('quantite :', quantite);
+      return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={quantite} displayQuantity={props.displayPanier.quantity} />
     })
   }
 
