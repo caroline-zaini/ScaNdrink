@@ -42,16 +42,17 @@ function Categorie(props) {
 
 var styles = StyleSheet.create({
     container: {
-        // backgroundColor: colors.primary,
         borderWidth: 1,
-        // borderColor: colors.tertiary,
+        borderColor: '#e6e8eb',
         borderRadius: hp('3%'),
-        marginRight: hp('1%')
+        marginRight: hp('1%'),
+        height : hp('19%'),
     },
     elements: {
         borderTopRightRadius: hp('3%'),
         borderTopLeftRadius: hp('3%'),
         overflow: 'hidden',
+        width: hp('18%'),
     },
     img: {
         width: hp('18%'),
@@ -59,11 +60,8 @@ var styles = StyleSheet.create({
         overflow: 'hidden',
     },
     txt: {
-        // color: colors.tertiary,
-        marginTop: hp('0.8%'),
+        marginTop: hp('2%'),
         fontWeight: 'bold',
-        // width: '100%',
-        // height: '100%',
         textAlign: 'center',
     },
   });
