@@ -60,17 +60,19 @@ function Produits(props) {
                 </View>
             </View>
 
-            <View style={{flexDirection: 'row', width: wp('35%')}}>
-                <View style={{width: '33%', height: '100%'}}>
+            <View style={{flexDirection: 'row', width: hp('20%')}}>
+                <View style={{width: hp('5.1%'), height: '100%'}}>
                     {displayBoutonMoins}
                 </View>
-                <View style={{width: '25%', height: '100%'}}>
+                <View style={{width: hp('5.3%'), height: '100%'}}>
                     {displayQantity}
                 </View>
-                <View style={{width: '33%', height: '100%'}}>
+                <View style={{width: hp('5.3%'), height: '100%'}}>
                     <TouchableOpacity
                         style={[styles.btn]}
-                        onPress={() => {addProduct(props)}} 
+                        onPress={() => {addProduct(props)
+                        console.log("click ok")
+                        }} 
                         >
                         <Text style={[styles.txt, {fontSize: 18, marginTop: '18%'}]}>+</Text>
                     </TouchableOpacity>
@@ -93,8 +95,8 @@ var styles = StyleSheet.create({
     //     height: 80,
     // },
     btn: {
-        height: 40,
-        width: 40,
+        height: hp('4.5%'),
+        width: hp('4.5%'),
         backgroundColor: colors.secondary,
         borderRadius: 400/2,
     },
