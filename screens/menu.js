@@ -95,18 +95,19 @@ var styles = StyleSheet.create({
     justifyContent: "center"
   },
   categorieList: {
-    padding: hp('2%'),
-    height: hp('18%')
+    paddingHorizontal: hp('0.9%'),
+    paddingVertical: hp('1.5%'),
+    height: hp('23%')
   },
   produitList: {
     backgroundColor: '#fff',
-    height: hp('55%'),
-    marginTop: hp('1.5%')
+    height: hp('52%'),
+    marginTop: hp('1%')
   },
   nomProduit: {
     fontSize: 15,
     fontWeight: "bold",
-    marginLeft: hp('2%'),
+    marginLeft: hp('5%'),
     marginTop: hp('2%'),
     color: colors.primary,
   },

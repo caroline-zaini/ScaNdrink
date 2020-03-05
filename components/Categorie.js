@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'react-native-elements';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -24,36 +24,48 @@ function Categorie(props) {
     : require('../assets/images/missing.jpg') // Rechercher une image via google avec un algorithme
 
     return (
-        <TouchableOpacity style={[styles.container, {backgroundColor: colors.primary}]} onPress={() => {handleClick()}}>
-            <Image
-                style={styles.img}
-                source={icon}
-            />
-            <Text style={styles.txt}>{props.categorieName}</Text>
-        </TouchableOpacity>
+        <View style={styles.container}>
+
+            <TouchableOpacity style={styles.elements} onPress={() => {handleClick()}}>
+
+                <Image
+                    style={styles.img}
+                    source={icon}
+                />
+                <Text style={styles.txt}>{props.categorieName}</Text>
+
+            </TouchableOpacity>
+
+        </View>
     );
 }
 
 var styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.primary,
-        borderRadius: 20,
-        marginRight: 15,
-        width: 126,
-        height: '100%',
+        // backgroundColor: colors.primary,
+        borderWidth: 1,
+        // borderColor: colors.tertiary,
+        borderRadius: hp('3%'),
+        marginRight: hp('1%')
+    },
+    elements: {
+        borderTopRightRadius: hp('3%'),
+        borderTopLeftRadius: hp('3%'),
+        overflow: 'hidden',
     },
     img: {
-        width: 126,
-        height: 80,
+        width: hp('18%'),
+        height: hp('12%'),
+        overflow: 'hidden',
     },
     txt: {
-        color: colors.tertiary,
-        marginTop: '5%',
-        fontSize: 16, 
-        width: '100%',
-        height: '100%',
+        // color: colors.tertiary,
+        marginTop: hp('0.8%'),
+        fontWeight: 'bold',
+        // width: '100%',
+        // height: '100%',
         textAlign: 'center',
-    }
+    },
   });
   
 
