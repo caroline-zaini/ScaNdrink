@@ -14,7 +14,7 @@ import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 
 /**
- * Import the composents
+ * Import the components
  */
 import Menu from './screens/menu'
 import Panier from './screens/panier'
@@ -23,15 +23,16 @@ import Connexion from './screens/connexion'
 import SuiviCommande from './screens/suiviCommande'
 import MonPaiement from './screens/monPaiement'
 
+/**
+ * Import redux
+ */
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
 import token from './reducers/token'
 
+import panier from './reducers/panier';
 
-const store = createStore(combineReducers({token}));
-
-
-
-
-
+const store = createStore(combineReducers({panier, token}));
 
 var TopNavigator = createMaterialTopTabNavigator({
   Inscription: Inscription,
@@ -120,19 +121,15 @@ var TopNavigator = createMaterialTopTabNavigator({
 
   const Navigation = createAppContainer(StackNavigator);
 
+function App() {
 
+  // console.log('store.getState() :', store.getState());
 
+  return (
+    <Provider store={store}>
+      <Navigation/>
+    </Provider>
+  );
+}
 
-  export default function App() {
-    return (
-        <Provider store={store}> 
-
-            <Navigation/>
-    
-        </Provider>
-        
-      
-    );
-   }
-
-
+export default App;

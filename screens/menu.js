@@ -2,21 +2,38 @@ console.disableYellowBox = true;
 
 import React, { useState, useEffect }  from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { Image, Card, Button} from 'react-native-elements';
+import { connect } from 'react-redux'
 
 import colors from '../components/colors';
+import Bouton from '../components/Bouton';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import Categorie from '../components/Categorie';
 import Produit from '../components/Produit';
 
 
+function Menu(props)  {
 
-
-export default function Menu({navigation})  {
+  var produits = [
+   {
+     name: 'Leffe',
+     price: 3.50,
+     quantity: 0,
+   },
+   {
+    name: 'Desperados',
+    price: 3.50,
+    quantity: 0,
+   },
+   {
+    name: 'Skoll',
+    price: 4.50,
+    quantity: 0,
+   },
+  ];
 
   var categoriesData = [
-    {name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: ['Leffe', 'Desperados', 'Skoll']},
+    {name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: produits},
     {name: 'Cocktails', img: require(`../assets/images/cocktail.jpg`), produits: ['porto', 'ricain', 'tequila framboise']},
     {name: 'Shooters'},
     {name: 'Softs'},
@@ -37,16 +54,18 @@ export default function Menu({navigation})  {
     var produitList = <Text>Aucun produits disponible</Text>
   } else {
     var produitList = produitsData.map((produit, j) => {
-      return <Produit key={j} produitName={produit} />
+      return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={produit.quantity} displayQuantity={props.displayPanier.quantity} />
     })
+  }
+
+  if (props.displayPanier[0]) {
+    var boutonPanier = <Bouton title='PANIER' destination='Panier' />
+  } else {
+    var boutonPanier = <View style={{height: hp('11%')}}></View>
   }
 
   return (
     <View style={styles.container}>
-
-      <View style={styles.header}>
-        <Text style={{fontSize: 25, marginTop: 25, color: '#fff'}}>Nom du bar</Text>
-      </View>
 
       <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.categorieList}>
         {categorieList}
@@ -55,12 +74,8 @@ export default function Menu({navigation})  {
       <ScrollView showsHorizontalScrollIndicator={false} style={styles.produitList}>
         {produitList}
       </ScrollView>
-
-      <Button
-        title="Panier"
-        buttonStyle={{height: hp('10%'), backgroundColor: colors.primary}}
-        onPress={() => navigation.navigate('Panier')}
-      />
+    
+      {boutonPanier}
 
     </View>
   );
@@ -83,7 +98,7 @@ var styles = StyleSheet.create({
   },
   produitList: {
     backgroundColor: '#fff',
-    height: hp('57%'),
+    height: hp('55%'),
     marginTop: hp('1.5%')
   },
   nomProduit: {
@@ -102,5 +117,12 @@ var styles = StyleSheet.create({
 
 });
 
+function mapStateToProps(state) {
+  console.log('state :', state.panier);
+  return { displayPanier: state.panier }
+}
 
-
+export default connect(
+  mapStateToProps,
+  null
+)(Menu);
