@@ -18,7 +18,7 @@ function Categorie(props) {
     var categorieColor = colors.primary
     selectedCategorie ? categorieColor = colors.primary : categorieColor = colors.tertiary;
 
-    // console.log('produits :', props.produits);
+    // console.log('produitsTEST :', props.produits);
     var icon = props.categorieImg
     ? props.categorieImg
     : require('../assets/images/missing.jpg') // Rechercher une image via google avec un algorithme

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import colors from '../components/colors';
 import { connect } from 'react-redux'
@@ -8,6 +8,20 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 function Produits(props) {
 
     const [selectedQuantity, setSelectedQuantity] = useState(props.produitQuantity);
+
+    // console.log('props.produitQuantity :', props.produitQuantity);
+    // console.log('selectedQuantity :', selectedQuantity);
+
+
+    useEffect(() => {
+        const setQuantity = async () => {
+
+            setSelectedQuantity(props.produitQuantity)
+
+        }
+        setQuantity();
+    
+      }, []);
 
     var addProduct = (produit) => {
         if (selectedQuantity >= 0) {
@@ -23,14 +37,14 @@ function Produits(props) {
         }
     }
 
-    if (selectedQuantity > 0) {
+    if (props.produitQuantity > 0) {
         var displayBoutonMoins = <TouchableOpacity
                             style={styles.btn}
                             onPress={() => {deleteProduct(props)}} 
                             >
                             <Text style={styles.txt}>-</Text>
                         </TouchableOpacity>
-        var displayQantity = <Text style={[styles.txt, {fontSize: 18, marginTop: '20%', color: '#000'}]}>{selectedQuantity}</Text>
+        var displayQantity = <Text style={[styles.txt, {fontSize: 18, marginTop: '20%', color: '#000'}]}>{props.produitQuantity}</Text>
     } else {
         var displayQantity = null;
         var displayBoutonMoins = null;
