@@ -122,8 +122,12 @@ var styles = StyleSheet.create({
     justifyContent: "center"
   },
   categorieList: {
-    paddingHorizontal: hp('0.9%'),
-    paddingVertical: hp('1.5%'),
+    // paddingHorizontal: hp('0.9%'),
+    // paddingVertical: hp('1.5%'),
+    paddingRight: hp('0.9%'),
+    paddingLeft: hp('0.9%'),
+    paddingTop: hp('1.5%'),
+    paddingBottom: hp('1.5%'),
     height: hp('23%')
   },
   produitList: {

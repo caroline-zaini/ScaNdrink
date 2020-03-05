@@ -88,10 +88,10 @@ var styles = StyleSheet.create({
         height: hp('10%'),
         backgroundColor: '#fff',
     },
-    img: {
-        width: 126,
-        height: 80,
-    },
+    // img: {
+    //     width: 126,
+    //     height: 80,
+    // },
     btn: {
         height: 40,
         width: 40,
