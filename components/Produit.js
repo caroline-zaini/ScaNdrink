@@ -86,7 +86,7 @@ var styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         height: hp('10%'),
-        backgroundColor: '#fff',
+        backgroundColor: colors.tertiary,
     },
     // img: {
     //     width: 126,

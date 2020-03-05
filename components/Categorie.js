@@ -13,6 +13,9 @@ function Categorie(props) {
     var handleClick = () => {
         !selectedCategorie ? setSelectedCategorie(true) : setSelectedCategorie(false);
         props.handleClickParent(props.categorieName, props.produits);
+        !selectedCategorie ? 
+        <Text style={styles.txtSelected}>{props.categorieName}</Text>
+        : <Text style={styles.txt}>{props.categorieName}</Text>
     }
 
     var categorieColor = colors.primary
@@ -64,6 +67,14 @@ var styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
+
+    txtSelected: {
+        marginTop:hp('0.8%'),
+        fontWeight: "bold",
+        textAlign: 'center',
+        color: colors.secondary
+        
+    }
   });
   
 

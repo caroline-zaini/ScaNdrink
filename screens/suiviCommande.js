@@ -1,5 +1,6 @@
 import React, { isValidElement } from 'react';
 import { StyleSheet, View, StatusBar, Image } from 'react-native';
+import colors from '../components/colors';
 
 
 import { Input, Text, Badge} from 'react-native-elements';
@@ -9,7 +10,13 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 
 
-
+// const colors = {
+//     // primary: '#1b2d3a', // Bleu foncé (plutôt noir)
+//     primary: '#1e1e1e',
+//     secondary: '#50bda1', // Vert bizarre
+//     tertiary: '#fff', // Blanc éclatant
+    
+// }
 
 
 export default function SuiviCommande() {
@@ -17,7 +24,7 @@ export default function SuiviCommande() {
 
     return (
   
-    <View style={{flex: 1, backgroundColor:'#F9F9F9'}}>
+    <View style={{flex: 1, backgroundColor: colors.tertiary}}>
 
         <View>
           <StatusBar barStyle="light-content" />
@@ -67,7 +74,7 @@ export default function SuiviCommande() {
             <Badge
             value="WC99" 
 
-            badgeStyle={{height:hp('15%'), width: hp('30%'), backgroundColor: 'black'}}
+            badgeStyle={{height:hp('15%'), width: hp('30%'), backgroundColor: colors.primary}}
             textStyle={{fontSize:40}}
             />
             
@@ -84,7 +91,7 @@ export default function SuiviCommande() {
     container: {
       flex: 1,
       marginTop:'10%',
-      backgroundColor: '#fff',
+      backgroundColor: colors.tertiary,
       alignItems: 'center',
       justifyContent: 'center',
     },

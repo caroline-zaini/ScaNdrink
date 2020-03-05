@@ -3,7 +3,7 @@ console.disableYellowBox = true;
 import React from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import colors from './components/colors';
 /**
  * Module for navigations
  */
@@ -36,19 +36,21 @@ var TopNavigator = createMaterialTopTabNavigator({
   Inscription: Inscription,
   Connexion: Connexion,
 },
+
+
   {
     defaultNavigationOptions: ({ navigation }) => ({
       
     }),
     tabBarOptions: {
-      activeTintColor: '#50bda1',
-      inactiveTintColor: '#FFFFFF',
+      activeTintColor: colors.secondary,
+      inactiveTintColor: colors.tertiary,
       style: {
-        backgroundColor: '#152228',
+        backgroundColor: colors.primary,
         paddingTop: hp('0%'),
       },
       indicatorStyle: {
-        backgroundColor: '#50bda1',
+        backgroundColor: colors.secondary,
         height:hp('0.4%')
       }
     }  
@@ -64,7 +66,7 @@ var TopNavigator = createMaterialTopTabNavigator({
       navigationOptions: {
         title: '',
         headerStyle: {
-          backgroundColor: '#152228',
+          backgroundColor: colors.primary,
         }
       }
     },
@@ -73,9 +75,9 @@ var TopNavigator = createMaterialTopTabNavigator({
       navigationOptions: {
         title: 'Mon Panier',
         headerStyle: {
-          backgroundColor: '#152228'
+          backgroundColor: colors.primary
         },
-        headerTintColor: '#FFFF',
+        headerTintColor: colors.tertiary,
         headerBackTitle: '',
       }
     },
@@ -85,9 +87,9 @@ var TopNavigator = createMaterialTopTabNavigator({
       navigationOptions:{
         title:'',
         headerStyle: {
-          backgroundColor: '#152228',
+          backgroundColor: colors.primary,
         },   
-        headerTintColor: '#FFFF',
+        headerTintColor: colors.tertiary,
         headerBackTitle: '',  
       }
     
@@ -97,9 +99,9 @@ var TopNavigator = createMaterialTopTabNavigator({
       navigationOptions: {
         title: 'Mon paiement',
       headerStyle: {
-        backgroundColor: '#152228'
+        backgroundColor: colors.primary
       },
-      headerTintColor: '#FFFF',
+      headerTintColor: colors.tertiary,
       headerBackTitle: '',
     }
     },
@@ -108,9 +110,9 @@ var TopNavigator = createMaterialTopTabNavigator({
       navigationOptions: {
         title: 'Suivi commande',
         headerStyle:{
-          backgroundColor: '#152228'
+          backgroundColor: colors.primary
         },
-        headerTintColor: '#FFFF',
+        headerTintColor: colors.tertiary,
         headerBackTitle: '',
       }
     }

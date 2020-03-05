@@ -131,7 +131,7 @@ var styles = StyleSheet.create({
     height: hp('23%')
   },
   produitList: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.tertiary,
     height: hp('52%'),
     marginTop: hp('1%')
   },
