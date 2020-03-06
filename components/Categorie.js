@@ -50,6 +50,9 @@ var styles = StyleSheet.create({
         borderRadius: hp('3%'),
         marginRight: hp('1%'),
         height : hp('19%'),
+        shadowOffset:{  width: 10,  height: 10,  },
+        shadowColor: 'black',
+        shadowOpacity: 1.0,
     },
     elements: {
         borderTopRightRadius: hp('3%'),
