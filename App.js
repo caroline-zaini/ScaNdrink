@@ -26,8 +26,11 @@ import MonPaiement from './screens/monPaiement'
  */
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import token from './reducers/token'
 
+/**
+ * Import reducer
+ */
+import token from './reducers/token'
 import panier from './reducers/panier';
 
 const store = createStore(combineReducers({panier, token}));

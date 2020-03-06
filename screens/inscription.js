@@ -1,13 +1,10 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
+import { StyleSheet, View, StatusBar, TextInput} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button, Icon } from 'react-native-elements';
 import {connect} from 'react-redux'
 
-import Bouton from '../components/Bouton'
-
-import Icon from 'react-native-vector-icons/Ionicons';
-
+import colors from '../components/colors';
 
 
 
@@ -16,48 +13,66 @@ function Inscription({navigation, props}) {
 
     const [firstName, setfirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
+    const [email_inscription, setEmail_inscription] = useState('')
     const [phone, setPhone] = useState('')
-    const [password, setPassword] = useState('')
-    const [listErrorsSignin, setErrorsSignin] = useState([])
+    const [password_inscription, setPassword_inscription] = useState('')
 
-    var sendUserInfo = async() =>  {
+    const [userExist, setUserExist] = useState(false)
+    const [listError_inscription, setError_inscription] = useState([])
+
+
+    var sendUserInfo_Inscription = async() =>  {
        console.log('la',firstName)
+    
+
       const data = await fetch("http://10.2.5.179:3000/inscription", {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `firstNameFromFront=${firstName}&lastNameFromFront=${lastName}&emailFromFront=${email}&phoneFromFront=${phone}&passwordFromFront=${password}`
-
+        body: `firstNameFromFront=${firstName}&lastNameFromFront=${lastName}&email_inscription=${email_inscription}&phone=${phone}&password_inscription=${password_inscription}`
       })
 
       var body = await data.json() 
+      console.log('body.result :', body.result);
 
-      
       if(body.result == true){
-        props.addToken(body.token)
-        setUserExists(true)
-        
-      }  else {
-        setErrorsSignin(body.error)
+        // props.addToken(body.token)
+        setUserExist(true)
+        console.log('userExist :', userExist);
+
+      } else {
+        setError_inscription(body.error)
       }
-      
     }
 
-  
+    var tabError= listError_inscription.map((error,i) => {
+      return(<Text style = {styles.comment}>{error}</Text>)
+    })
 
-
-
+    var button;
+    if (userExist) {
+    button = <Button
+            buttonStyle={styles.btn}
+            title="S'INSCRIRE"
+            onPress= {() => {sendUserInfo_Inscription(), navigation.navigate('MonPaiement')}}
+            />
+    
+    } else {
+    button = <Button
+            buttonStyle={styles.btn}
+            title="S'INSCRIRE"
+            onPress= {() => {sendUserInfo_Inscription()}}
+            />
+    }
 
     return (
   
- 
-    <View style={{flex:1, backgroundColor:'#F9F9F9'}}>
+    <View style={styles.container}>
        
         <View>
         <StatusBar barStyle="light-content" />
         </View>
 
-        <View style= {{ justifyContent:"center", alignItems:'center', marginTop: hp('4%'), marginBottom:hp('5%')}}>
+        <View style= {styles.title}>
         <Text style= {{fontSize: 25 }}>Créer mon compte</Text>
         </View >
 
@@ -79,14 +94,16 @@ function Inscription({navigation, props}) {
               value={lastName}
             />
             </View>
-        
+
+          
             <TextInput
-              placeholder = "email"
+              placeholder = "email_inscription"
               style = {styles.inputLarge}
               inlineImageLeft='ios-mail'
-              onChangeText={(value) => setEmail(value)} 
-              value={email}
+              onChangeText={(value) => setEmail_inscription(value)} 
+              value={email_inscription}
             />
+           
         
             <TextInput
               placeholder = "Téléphone"
@@ -95,27 +112,20 @@ function Inscription({navigation, props}) {
               value={phone}
             />
           
-            <TextInput
-            placeholder = "Mot de passe"
-            style = {styles.inputLarge}
-            onChange={(value) => setPassword(value)}
-            value={password}
-           
+            <TextInput 
+              placeholder = "Mot de passe"
+              style = {styles.inputLarge}
+              onChangeText={(value) => setPassword_inscription(value)}
+              value={password_inscription}
             />
  
 
           </View>
 
+            {tabError}
 
-          <Button
-          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
-          title="S'INSCRIRE"
-          onPress={() => {console.log('ic'),sendUserInfo(), navigation.navigate('MonPaiement')}}
-         
-          />
+            {button}
 
-         
-      
     </View>
   
 
@@ -128,16 +138,19 @@ function Inscription({navigation, props}) {
   
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      marginTop:'10%',
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+      flex:1, 
+      backgroundColor:'#F9F9F9'
+    },
+    title: {
+      justifyContent:"center", 
+      alignItems:'center', 
+      marginTop: hp('4%'), 
+      marginBottom:hp('3%')
     },
     inputViewGlobal: {
       marginLeft:hp('2%'), 
       marginRight:hp('2%'), 
-      marginBottom:hp('8%')
+      marginBottom:hp('2%')
     },
     inputSmall: {
       width: hp('20%'),
@@ -154,6 +167,19 @@ function Inscription({navigation, props}) {
       marginRight: hp('2%'),
       borderBottomColor: 'black',
       borderBottomWidth:1
+    },
+    comment: {
+      justifyContent:"center", 
+      alignItems:'center',   
+      marginLeft:hp('2%'),
+      color: 'grey'
+    },
+    btn: {
+      backgroundColor: '#50bda1', 
+      marginLeft:hp('7%'), 
+      marginRight:hp('7%'), 
+      marginTop: hp('4%'), 
+      height:hp('6%')
     }
   });
 
