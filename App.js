@@ -14,6 +14,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 /**
  * Import the components
  */
+import Scan from './screens/scanner'
 import Menu from './screens/menu'
 import Panier from './screens/panier'
 import Inscription from './screens/inscription'
@@ -61,10 +62,21 @@ var TopNavigator = createMaterialTopTabNavigator({
  
 
   var StackNavigator = createStackNavigator({
+    Scan: {
+      screen: Scan,
+      navigationOptions: {
+        title: 'Scannes ta table',
+        headerStyle: {
+          backgroundColor: colors.primary,
+          
+          poisition : 'relative'
+         }
+        }
+      },
     Menu: {
       screen: Menu,
       navigationOptions: {
-        title: '',
+        title: 'Menu',
         headerStyle: {
           backgroundColor: colors.primary,
         }
