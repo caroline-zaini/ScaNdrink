@@ -55,7 +55,7 @@ function Produits(props) {
 
             <View style={{width: wp('65%')}}>
                 <View style={{marginLeft: '10%'}}>
-                    <Text style={styles.nomProduit}>{props.produitName} (25cl)</Text>
+                    <Text style={styles.nomProduit}>{props.produitName} {props.produitLitre}cl</Text>
                     <Text style={styles.prixProduit}>{props.produitPrice}€</Text>
                 </View>
             </View>
@@ -117,10 +117,10 @@ var styles = StyleSheet.create({
 function mapDispatchToProps(dispatch) {
     return {
         addToBasket: function(produit) {
-            dispatch( {type: 'addProduit', produitName: produit.produitName, produitPrice: produit.produitPrice, produitQuantity: produit.produitQuantity }) 
+            dispatch( {type: 'addProduit', produitName: produit.produitName, produitPrice: produit.produitPrice, produitQuantity: produit.produitQuantity, produitLitre: produit.produitLitre }) 
         },
         removeFromBasket: function(produit) {
-            dispatch( {type: 'deleteProduit', produitName: produit.produitName, produitPrice: produit.produitPrice, produitQuantity: produit.produitQuantity })
+            dispatch( {type: 'deleteProduit', produitName: produit.produitName, produitPrice: produit.produitPrice, produitQuantity: produit.produitQuantity, produitLitre: produit.produitLitre })
         }
     }
 }

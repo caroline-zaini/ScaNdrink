@@ -1,40 +1,88 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {Text, Button } from 'react-native-elements';
+import colors from '../components/colors';
+
+// primary: '#1e1e1e',
+// secondary: '#50bda1', // Vert bizarre
+// tertiary: '#fff', // Blanc éclatant
+
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux'
 
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-function Connexion({navigation}) {
+
+
+function Connexion({navigation, props}) {
 
   
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email_connexion, setEmail_connexion] = useState('')
+  const [password_connexion, setPassword_connexion] = useState('')
+  const [userExist, setUserExist] = useState(false)
+  const [listError_connexion, setError_connexion] = useState([])
 
-  var sendUserInfo = async() =>  {
-    console.log('la',firstName)
+ 
+  /**
+  *connexion with router
+  */
+
+  var sendUserInfo_Connexion = async() =>  {
+    
+    console.log('la',email_connexion)
+
    const data = await fetch("http://10.2.5.179:3000/connexion", {
      method: 'POST',
      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-     body: `emailFromFront=${email}&passwordFromFront=${password}`
-
+     body: `email_connexion=${email_connexion}&password_connexion=${password_connexion}`
    })
 
    var body = await data.json()
 
-   if(body.result == true){
-     props.addToken(body.token)
-     setUserExists(true)
+   console.log('body :', body);
+   console.log('body :', body.result);
+
+   if(body.result){
+    
+    setUserExist(true)
+    //  props.addToken(body.token)
+    
+     console.log('userExist :', userExist);
+    
      
-   }  else {
-     setErrorsSignin(body.error)
-   }
-   
+   } else {
+    setError_connexion(body.error)
+    
+   } 
  }
 
+ /**
+  * condition for connexion
+  */
+ var button;
+  if (userExist) {
+  button = <Button
+          buttonStyle={styles.btn}
+          title="SE CONNECTER"
+          onPress= {() => {console.log('ic'),sendUserInfo_Connexion(), navigation.navigate('MonPaiement')}}
+          />
+   
+  } else {
+  button = <Button
+          buttonStyle={styles.btn}
+          title="SE CONNECTER"
+          onPress= {() => {console.log('ic'),sendUserInfo_Connexion()}}
+          />
+  }
+
+  var tabError= listError_connexion.map((error,i) => {
+    return(<Text style = {styles.comment}>{error}</Text>)
+  })
+
+  
+  
 
     return (
   
@@ -49,31 +97,38 @@ function Connexion({navigation}) {
           </View >
   
   
-          <View style={{marginLeft:hp('2%'), marginRight:hp('2%')}}>
-
+          <View style={styles.searchSection}>
+            <Icon
+              style={styles.searchIcon}
+              name="envelope"
+              size={15}
+              color="black"
+              />
             <TextInput
              placeholder = "Email"
-             style = {styles.inputLarge}
-             onChangeText={(value) => setEmail(value)} 
-              value={email}
+             style={styles.input}
+             onChangeText={(value) => setEmail_connexion(value)} 
+             value={email_connexion}
             />
-
-            <TextInput
-            placeholder = "Mot de Passe"
-            style = {styles.inputLarge}
-            onChangeText={(value) => setPassword(value)} 
-              value={password}
-            
-            
-            />
-
           </View>
+          <View style={styles.searchSection}>
+            <Icon
+              style={styles.searchIcon}
+              name="lock"
+              size={20}
+              color="black"
+              />
+            <TextInput
+              placeholder = "Mot de Passe"
+              style={styles.input}
+              onChangeText={(value) => setPassword_connexion(value)} 
+              value={password_connexion}
+            />
+          </View>
+
+          {tabError}
   
-          <Button
-          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), marginTop: hp('4%'), height:hp('6%')}}
-          title="SE CONNECTER"
-          onPress= {() => {console.log('ic'),sendUserInfo(), navigation.navigate('MonPaiement')}}
-          />
+          {button}
          
       
     </View>
@@ -88,7 +143,7 @@ function Connexion({navigation}) {
   const styles = StyleSheet.create({
     container: {
       flex:1, 
-      backgroundColor:'#F9F9F9'
+      backgroundColor: colors.tertiary
     },
     title: {
       justifyContent:"center", 
@@ -96,15 +151,44 @@ function Connexion({navigation}) {
       marginTop: hp('4%'), 
       marginBottom:hp('7%')
     },
-    inputLarge: {
-      width: hp('42%'),
-      height: hp('4%'),
-      marginBottom: hp('3%'),
-      marginRight: hp('2%'),
-      borderBottomColor: 'black',
-      borderBottomWidth:1
+    searchSection: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+    },
+    searchIcon: {
+        padding: 10,
+        marginLeft: hp('5%'),
+    },
+    input: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 0,
+        backgroundColor: '#fff',
+        borderBottomColor: 'black',
+        borderBottomWidth:1,
+        marginRight: hp('7%'),
+        color: '#424242',
+    },
+    comment: {
+      justifyContent:"center", 
+      alignItems:'center', 
+      marginTop: hp('1%'), 
+      marginLeft:hp('2%'),
+      color: 'grey'
+    },
+    btn: {
+      backgroundColor: '#50bda1', 
+      marginLeft:hp('7%'), 
+      marginRight:hp('7%'), 
+      marginTop: hp('4%'), 
+      height:hp('6%')
     }
   });
+
 
   function mapDispatchToProps(dispatch){
     return {

@@ -19,17 +19,57 @@ function Menu(props)  {
      name: 'Leffe',
      price: 3.50,
      quantity: 0,
+     litre: 25,
    },
    {
     name: 'Desperados',
-    price: 3.50,
+    price: 3.60,
     quantity: 0,
+    litre: 33,
    },
    {
     name: 'Skoll',
     price: 4.50,
     quantity: 0,
+    litre: 25,
    },
+   {
+    name: 'Brooklyn Lagers',
+    price: 7.50,
+    quantity: 0,
+    litre: 50,
+   },
+   {
+    name: 'Chouffe',
+    price: 6.50,
+    quantity: 0,
+    litre: 50,
+   },
+   {
+    name: 'Heineken',
+    price: 4.50,
+    quantity: 0,
+    litre: 25,
+   },
+   {
+    name: '1664',
+    price: 4.50,
+    quantity: 0,
+    litre: 25,
+   },
+   {
+    name: 'Corona',
+    price: 4.50,
+    quantity: 0,
+    litre: 25,
+   },
+   {
+    name: 'Blonde du moment',
+    price: 4.50,
+    quantity: 0,
+    litre: 25,
+   },
+   
   ];
 
   var produitsTwo = [
@@ -37,25 +77,28 @@ function Menu(props)  {
       name: 'Martini',
       price: 5.50,
       quantity: 0,
+      litre: 25,
     },
     {
      name: 'Margarita',
      price: 5,
      quantity: 0,
+     litre: 25,
     },
     {
      name: 'Cosmopolitain',
      price: 5.50,
      quantity: 0,
+     litre: 25,
     },
    ];
 
   var categoriesData = [
     {name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: produits},
     {name: 'Cocktails', img: require(`../assets/images/cocktail.jpg`), produits: produitsTwo},
-    {name: 'Shooters'},
-    {name: 'Softs'},
-    {name: 'Vins'}
+    {name: 'Shooters', img: require(`../assets/images/shooters.jpg`)},
+    {name: 'Softs', img: require(`../assets/images/soft.jpg`)},
+    {name: 'Vins', img: require(`../assets/images/vins.jpg`)}
   ];
 
   const [produitsData, setProduitsData] = useState(categoriesData[0].produits);
@@ -73,7 +116,7 @@ function Menu(props)  {
   });
 
   if (produitsData == undefined) {
-    var produitList = <Text>Aucun produits disponible</Text>
+    var produitList = <Text style={styles.texte}>Aucun produits disponible</Text>
   } else {
     var produitList = produitsData.map((produit, j) => {
 
@@ -83,7 +126,7 @@ function Menu(props)  {
           quantite = props.displayPanier[i].quantity;
       }
       console.log('quantite :', quantite);
-      return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={quantite} displayQuantity={props.displayPanier.quantity} />
+      return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={quantite} produitLitre={produit.litre} displayQuantity={props.displayPanier.quantity} />
     })
   }
 
@@ -103,8 +146,14 @@ function Menu(props)  {
       <ScrollView showsHorizontalScrollIndicator={false} style={styles.produitList}>
         {produitList}
       </ScrollView>
-    
-      {boutonPanier}
+
+      <View style={styles.bouton}>
+
+       {boutonPanier}
+      </View>
+        
+      
+      
 
     </View>
   );
@@ -115,11 +164,19 @@ var styles = StyleSheet.create({
     backgroundColor: colors.tertiary,
     flex: 1
   },
+  bouton :{
+    padding: hp('0.5%'),
+    marginTop: hp('0.5%'),
+    alignContent: 'center'
+  },
+  texte :{
+    padding: hp('10%'),
+    alignSelf: 'center',
+  },
   header: {
     backgroundColor: colors.primary,
     height: hp('11.5%'),
-    alignItems: "center",
-    justifyContent: "center"
+
   },
   categorieList: {
     // paddingHorizontal: hp('0.9%'),
@@ -133,7 +190,8 @@ var styles = StyleSheet.create({
   produitList: {
     backgroundColor: colors.tertiary,
     height: hp('52%'),
-    marginTop: hp('1%')
+    marginTop: hp('1%'),
+    marginBottom:hp('2%'),
   },
   nomProduit: {
     fontSize: 15,
