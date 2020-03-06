@@ -9,7 +9,7 @@ import colors from '../components/colors';
 
 
 
-function Inscription({navigation, props}) {
+function Inscription({navigation}, props) {
 
     const [firstName, setfirstName] = useState('')
     const [lastName, setLastName] = useState('')

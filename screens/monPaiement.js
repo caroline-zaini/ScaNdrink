@@ -1,25 +1,25 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
-
 import { Text, Button } from 'react-native-elements';
+import { connect } from 'react-redux'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import colors from '../components/colors';
 
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
-// const colors = {
-//   // primary: '#1b2d3a', // Bleu foncé (plutôt noir)
-//   primary: '#1e1e1e',
-//   secondary: '#50bda1', // Vert bizarre
-//   tertiary: '#fff', // Blanc éclatant
-  
-// }
 
 
 
+function MonPaiement({navigation}, props) {
 
-export default function MonPaiement({navigation}) {
+  // var total = 0;
 
+  console.log('props.displayPanier dans paiement :', props.displayPanier);
+  console.log('');
+
+  // var listPanier = props.displayPanier.map((produit, j) => {
+  //   total += produit.price*produit.quantity;
+    
+  // })
 
 
 
@@ -37,26 +37,41 @@ export default function MonPaiement({navigation}) {
 
           <View style={styles.globalView}>
 
-            <View>
-              <Text style={styles.label}>E-mail</Text>
+
+            <View style={{marginTop:hp('3%')}}>
+              <Text style={styles.label}>Informations de la carte</Text>
               <TextInput 
               style = {styles.inputLarge}
-              placeholder = "  E-mail"
+              placeholder = "  1234 1234 1234 1234"
+             
+              />
+              <View style={{flexDirection:'row'}}>
+                <TextInput 
+                style = {styles.inputSmallLeft}
+                placeholder = "  MM / AA"
+                />
+                <TextInput 
+                style = {styles.inputSmallRight}
+                placeholder = "  CVC"
+                />
+              </View>
+
+            </View>
+
+            <View style={{marginTop:hp('3%')}}>
+              <Text style={styles.label}>Nom du titulaire de la carte</Text>
+              <TextInput 
               style = {styles.inputLarge}
+              placeholder = "  Name"
               />
             </View>
 
-            <View style={{marginTop:hp('1%')}}>
-              <Text style={styles.label}>Information de la carte</Text>
+            <View style={{marginTop:hp('3%'), marginBottom:hp('3%')}}>
+              <Text style={styles.label}>Pays ou région</Text>
               <TextInput 
               style = {styles.inputLarge}
-              placeholder = "  Information de la carte"
-              style = {styles.inputLarge}
-              />
-              <TextInput 
-              style = {styles.inputLarge}
-              placeholder = "  Information de la carte"
-              style = {styles.inputLarge}
+              placeholder = "  France"
+            
               />
             </View>
 
@@ -68,7 +83,7 @@ export default function MonPaiement({navigation}) {
 
           <Button
           buttonStyle={{backgroundColor: colors.secondary, marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
-          title="PAYER 3,20 €"
+          title = "Payer 3,20 €"
           onPress={() => navigation.navigate('SuiviCommande')}
           />
          
@@ -83,7 +98,6 @@ export default function MonPaiement({navigation}) {
   }
   
   const styles = StyleSheet.create({
-<<<<<<< HEAD
     conatainer: {
       flex:1, 
       backgroundColor:'#F9F9F9'
@@ -104,17 +118,36 @@ export default function MonPaiement({navigation}) {
     inputLarge: {
       width: hp('42%'),
       height: hp('4%'),
-     
       marginRight: hp('2%'),
-      borderColor: 'black',
+      borderColor: '#636e72',
       borderWidth:0.3
-=======
-    container: {
-      flex: 1,
-      marginTop:'10%',
-      backgroundColor: colors.tertiary,
-      alignItems: 'center',
-      justifyContent: 'center',
->>>>>>> af8a11a571999a78224e613e750f5658566103aa
+    },
+    inputSmallLeft: {
+      width: hp('21%'),
+      height: hp('4%'),
+      borderLeftColor: '#636e72',
+      borderLeftWidth: 0.3,
+      borderBottomColor: '#636e72',
+      borderBottomWidth: 0.3,
+    },
+    inputSmallRight: {
+      width: hp('21%'),
+      height: hp('4%'),
+      borderLeftColor: '#636e72',
+      borderLeftWidth: 0.3,
+      borderRightColor: '#636e72',
+      borderRightWidth: 0.3,
+      borderBottomColor: '#636e72',
+      borderBottomWidth: 0.3,
     },
   });
+
+  function mapStateToProps(state) {
+    console.log('state :', state.panier);
+    return { displayPanier: state.panier }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    null
+  )(MonPaiement);
