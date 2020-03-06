@@ -2,23 +2,43 @@ import React from 'react';
 import { StyleSheet, View, StatusBar, ScrollView } from 'react-native';
 import { connect } from 'react-redux'
 import { Text, Button } from 'react-native-elements';
-
-import ProduitPanier from '../components/ProduitPanier';
-import Bouton from '../components/Bouton';
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import colors from '../components/colors';
 
-function Panier(props) {
+/**
+ * import from components
+ */
+import colors from '../components/colors';
+import Bouton from '../components/Bouton';
+import ProduitPanier from '../components/ProduitPanier';
+
+
+
+
+
+
+function Panier({displayPanier, navigation}) {
 
     var total = 0;
 
-    console.log('props.displayPanier :', props.displayPanier);
+    console.log('displayPanier :', displayPanier);
 
-    var listPanier = props.displayPanier.map((produit, j) => {
+    var listPanier = displayPanier.map((produit, j) => {
       total += produit.price*produit.quantity;
       return <ProduitPanier key={j} produitName={produit.name} produitQuantity={produit.quantity} produitPrice={produit.price*produit.quantity} />
     })
+
+
+    var sendOrderInfo = async() => {
+
+      const data = await fetch("http://10.2.5.179:3000/panier", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `total=${total}`
+      })
+
+      var body = await data.json() 
+      console.log('body :', body);
+    }
 
     return (
   
@@ -46,7 +66,12 @@ function Panier(props) {
          
           </View>
 
-         <Bouton title='ETAPE SUIVANTE' destination='Inscription' />
+         {/* <Bouton title='ETAPE SUIVANTE' destination='Inscription' /> */}
+         <Button
+            buttonStyle={styles.btn}
+            title="ETAPE SUIVANTE"
+            onPress= {() => {sendOrderInfo(), navigation.navigate('Inscription')}}
+            />
 
         </ScrollView>
       
