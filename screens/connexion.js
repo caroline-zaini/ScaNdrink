@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {Text, Button } from 'react-native-elements';
+import colors from '../components/colors';
+
+// primary: '#1e1e1e',
+// secondary: '#50bda1', // Vert bizarre
+// tertiary: '#fff', // Blanc éclatant
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux'
 
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Redirect } from 'react-router-dom';
+
+
 
 
 
@@ -91,22 +97,33 @@ function Connexion({navigation, props}) {
           </View >
   
   
-          <View style={{marginLeft:hp('2%'), marginRight:hp('2%')}}>
-
+          <View style={styles.searchSection}>
+            <Icon
+              style={styles.searchIcon}
+              name="envelope"
+              size={15}
+              color="black"
+              />
             <TextInput
-             placeholder = "email_connexion"
-             style = {styles.inputLarge}
+             placeholder = "Email"
+             style={styles.input}
              onChangeText={(value) => setEmail_connexion(value)} 
              value={email_connexion}
             />
-
+          </View>
+          <View style={styles.searchSection}>
+            <Icon
+              style={styles.searchIcon}
+              name="lock"
+              size={20}
+              color="black"
+              />
             <TextInput
               placeholder = "Mot de Passe"
-              style = {styles.inputLarge}
+              style={styles.input}
               onChangeText={(value) => setPassword_connexion(value)} 
               value={password_connexion}
             />
-
           </View>
 
           {tabError}
@@ -126,7 +143,7 @@ function Connexion({navigation, props}) {
   const styles = StyleSheet.create({
     container: {
       flex:1, 
-      backgroundColor:'#F9F9F9'
+      backgroundColor: colors.tertiary
     },
     title: {
       justifyContent:"center", 
@@ -134,13 +151,27 @@ function Connexion({navigation, props}) {
       marginTop: hp('4%'), 
       marginBottom:hp('7%')
     },
-    inputLarge: {
-      width: hp('42%'),
-      height: hp('4%'),
-      marginBottom: hp('3%'),
-      marginRight: hp('2%'),
-      borderBottomColor: 'black',
-      borderBottomWidth:1
+    searchSection: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+    },
+    searchIcon: {
+        padding: 10,
+        marginLeft: hp('5%'),
+    },
+    input: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 0,
+        backgroundColor: '#fff',
+        borderBottomColor: 'black',
+        borderBottomWidth:1,
+        marginRight: hp('7%'),
+        color: '#424242',
     },
     comment: {
       justifyContent:"center", 

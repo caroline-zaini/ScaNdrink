@@ -83,7 +83,6 @@ export default function MonPaiement({navigation}) {
   }
   
   const styles = StyleSheet.create({
-<<<<<<< HEAD
     conatainer: {
       flex:1, 
       backgroundColor:'#F9F9F9'
@@ -108,13 +107,5 @@ export default function MonPaiement({navigation}) {
       marginRight: hp('2%'),
       borderColor: 'black',
       borderWidth:0.3
-=======
-    container: {
-      flex: 1,
-      marginTop:'10%',
-      backgroundColor: colors.tertiary,
-      alignItems: 'center',
-      justifyContent: 'center',
->>>>>>> af8a11a571999a78224e613e750f5658566103aa
     },
   });

@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, StatusBar, TextInput} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { Text, Button, Icon } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import {connect} from 'react-redux'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import colors from '../components/colors';
 
@@ -77,9 +78,9 @@ function Inscription({navigation, props}) {
         </View >
 
 
-        <View style={styles.inputViewGlobal}>
 
-            <View style={{flexDirection:'row'}}>
+
+          <View style={{flexDirection:'row', marginLeft: hp('5%'),}}>
             <TextInput 
               placeholder = "Prénom"
               style = {styles.inputSmall}
@@ -88,39 +89,55 @@ function Inscription({navigation, props}) {
             />
           
             <TextInput
-              placeholder = "nom"
+              placeholder = "Nom"
               style = {styles.inputSmall}
               onChangeText={(value) => setLastName(value)} 
               value={lastName}
             />
             </View>
-
-          
-            <TextInput
-              placeholder = "email_inscription"
-              style = {styles.inputLarge}
-              inlineImageLeft='ios-mail'
-              onChangeText={(value) => setEmail_inscription(value)} 
-              value={email_inscription}
-            />
-           
+            <View style={{flexDirection:'row', marginLeft: hp('4%'),}}>
+              <Icon
+                style={styles.searchIcon}
+                name="envelope"
+                size={15}
+                color={colors.primary}
+              />
+              <TextInput
+                placeholder = "Email"
+                style = {styles.input}
+                onChangeText={(value) => setEmail_inscription(value)} 
+                value={email_inscription}
+              />
+            </View>
+            <View style={{flexDirection:'row', marginLeft: hp('4%'),}}>
+              <Icon       
+                style={styles.searchIcon}
+                name="phone"
+                size={20}
+                color={colors.primary}
+                />
+              <TextInput
+                placeholder = "Téléphone"
+                style = {styles.input}
+                onChangeText={(value) => setPhone(value)} 
+                value={phone}
+              />
+            </View>
+            <View style={{flexDirection:'row', marginLeft: hp('4.2%'),}}>
+              <Icon
+                style={styles.searchIcon}
+                name="lock"
+                size={20}
+                color= {colors.primary}
+              />
+              <TextInput 
+                placeholder = "Mot de passe"
+                style = {styles.input}
+                onChangeText={(value) => setPassword_inscription(value)}
+                value={password_inscription}
+              />
+            </View>
         
-            <TextInput
-              placeholder = "Téléphone"
-              style = {styles.inputLarge}
-              onChangeText={(value) => setPhone(value)} 
-              value={phone}
-            />
-          
-            <TextInput 
-              placeholder = "Mot de passe"
-              style = {styles.inputLarge}
-              onChangeText={(value) => setPassword_inscription(value)}
-              value={password_inscription}
-            />
- 
-
-          </View>
 
             {tabError}
 
@@ -139,7 +156,7 @@ function Inscription({navigation, props}) {
   const styles = StyleSheet.create({
     container: {
       flex:1, 
-      backgroundColor:'#F9F9F9'
+      backgroundColor: colors.tertiary
     },
     title: {
       justifyContent:"center", 
@@ -147,27 +164,51 @@ function Inscription({navigation, props}) {
       marginTop: hp('4%'), 
       marginBottom:hp('3%')
     },
-    inputViewGlobal: {
-      marginLeft:hp('2%'), 
-      marginRight:hp('2%'), 
-      marginBottom:hp('2%')
+    searchSection: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: colors.tertiary,
     },
+    searchIcon: {
+        padding: 10,
+        marginTop: 7,
+        
+    },
+    input: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 0,
+        backgroundColor: colors.tertiary,
+        borderBottomColor: colors.primary,
+        borderBottomWidth:1,
+        marginRight: hp('6%'),
+        color: '#424242',
+    },
+    // inputViewGlobal: {
+    //   marginLeft:hp('2%'), 
+    //   marginRight:hp('2%'), 
+    //   marginBottom:hp('2%')
+    // },
     inputSmall: {
       width: hp('20%'),
       height: hp('4%'),
       marginBottom: hp('3%'),
       marginRight: hp('2%'),
-      borderBottomColor: 'black',
+      
+      borderBottomColor: colors.primary,
       borderBottomWidth:1
     },
-    inputLarge: {
-      width: hp('42%'),
-      height: hp('4%'),
-      marginBottom: hp('3%'),
-      marginRight: hp('2%'),
-      borderBottomColor: 'black',
-      borderBottomWidth:1
-    },
+    // inputLarge: {
+    //   width: hp('42%'),
+    //   height: hp('4%'),
+    //   marginBottom: hp('3%'),
+    //   marginRight: hp('2%'),
+    //   borderBottomColor: 'black',
+    //   borderBottomWidth:1
+    // },
     comment: {
       justifyContent:"center", 
       alignItems:'center',   
@@ -175,7 +216,7 @@ function Inscription({navigation, props}) {
       color: 'grey'
     },
     btn: {
-      backgroundColor: '#50bda1', 
+      backgroundColor: colors.secondary, 
       marginLeft:hp('7%'), 
       marginRight:hp('7%'), 
       marginTop: hp('4%'), 
