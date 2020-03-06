@@ -13,6 +13,9 @@ function Categorie(props) {
     var handleClick = () => {
         !selectedCategorie ? setSelectedCategorie(true) : setSelectedCategorie(false);
         props.handleClickParent(props.categorieName, props.produits);
+        !selectedCategorie ? 
+        <Text style={styles.txtSelected}>{props.categorieName}</Text>
+        : <Text style={styles.txt}>{props.categorieName}</Text>
     }
 
     var categorieColor = colors.primary
@@ -42,16 +45,20 @@ function Categorie(props) {
 
 var styles = StyleSheet.create({
     container: {
-        // backgroundColor: colors.primary,
         borderWidth: 1,
-        // borderColor: colors.tertiary,
+        borderColor: '#e6e8eb',
         borderRadius: hp('3%'),
-        marginRight: hp('1%')
+        marginRight: hp('1%'),
+        height : hp('19%'),
+        shadowOffset:{  width: 10,  height: 10,  },
+        shadowColor: 'black',
+        shadowOpacity: 1.0,
     },
     elements: {
         borderTopRightRadius: hp('3%'),
         borderTopLeftRadius: hp('3%'),
         overflow: 'hidden',
+        width: hp('18%'),
     },
     img: {
         width: hp('18%'),
@@ -59,13 +66,18 @@ var styles = StyleSheet.create({
         overflow: 'hidden',
     },
     txt: {
-        // color: colors.tertiary,
-        marginTop: hp('0.8%'),
+        marginTop: hp('2%'),
         fontWeight: 'bold',
-        // width: '100%',
-        // height: '100%',
         textAlign: 'center',
     },
+
+    txtSelected: {
+        marginTop:hp('0.8%'),
+        fontWeight: "bold",
+        textAlign: 'center',
+        color: colors.secondary
+        
+    }
   });
   
 

@@ -64,14 +64,14 @@ function ProduitPanier(props) {
             <Overlay
             isVisible={modalVisibility}
             onBackdropPress={ () => setModalVisibility(false)}
-            height={'34%'}
-            width={'100%'}
+            height={'20%'}
+            width={'85%'}
             overlayBackgroundColor={colors.tertiary}
             containerStyle={{}}
             >
                 <View>
 
-                    <View style={{flexDirection: 'row', marginTop: '5%', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flexDirection: 'row', paddingTop: '3%', alignItems: 'center', justifyContent: 'center'}}>
 
                         <Text style={styles.nomProduit}>{props.produitName} (25cl)</Text>
 
@@ -97,7 +97,11 @@ function ProduitPanier(props) {
 
                     </View>
 
-                    <Text style={[styles.prixProduit]}>{props.produitPrice}€</Text>
+                    <View style={{flexDirection: 'row', marginTop: '3%',alignItems: 'center', justifyContent: 'center'}}>
+
+                        <Text>Prix: {props.produitPrice}€</Text>
+
+                    </View>
 
                 </View>
 
@@ -113,7 +117,7 @@ var styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         height: hp('10%'),
-        backgroundColor: '#fff',
+        backgroundColor: colors.tertiary,
         alignItems: 'center',
         paddingBottom: hp('2%')
     },

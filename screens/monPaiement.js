@@ -3,9 +3,17 @@ import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
 
 import { Text, Button } from 'react-native-elements';
 
+import colors from '../components/colors';
+
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-
+// const colors = {
+//   // primary: '#1b2d3a', // Bleu foncé (plutôt noir)
+//   primary: '#1e1e1e',
+//   secondary: '#50bda1', // Vert bizarre
+//   tertiary: '#fff', // Blanc éclatant
+  
+// }
 
 
 
@@ -59,7 +67,7 @@ export default function MonPaiement({navigation}) {
   
 
           <Button
-          buttonStyle={{backgroundColor: '#50bda1', marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
+          buttonStyle={{backgroundColor: colors.secondary, marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
           title="PAYER 3,20 €"
           onPress={() => navigation.navigate('SuiviCommande')}
           />
@@ -75,6 +83,7 @@ export default function MonPaiement({navigation}) {
   }
   
   const styles = StyleSheet.create({
+<<<<<<< HEAD
     conatainer: {
       flex:1, 
       backgroundColor:'#F9F9F9'
@@ -99,5 +108,13 @@ export default function MonPaiement({navigation}) {
       marginRight: hp('2%'),
       borderColor: 'black',
       borderWidth:0.3
+=======
+    container: {
+      flex: 1,
+      marginTop:'10%',
+      backgroundColor: colors.tertiary,
+      alignItems: 'center',
+      justifyContent: 'center',
+>>>>>>> af8a11a571999a78224e613e750f5658566103aa
     },
   });
