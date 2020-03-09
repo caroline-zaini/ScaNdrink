@@ -41,11 +41,9 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
             </View>
 
             <ScrollView style={{backgroundColor: colors.tertiary}}>
-  
-            <View style={styles.produitContainer}>
+           
             {listPanier}
-            </View>
-
+         
             </ScrollView>
 
             <View style={styles.totalContainer}>
@@ -76,17 +74,9 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: colors.tertiary,
-    },
-    produitContainer: {
-      justifyContent: 'center',
-      alignItems:'center',
-      marginTop: hp('4%'),
-      height: hp('20%')
-   
-    },
+    },  
     totalContainer: {
       flexDirection: 'row',
-    
       marginTop: hp('2%'),
       marginBottom: hp('2%'),
       height: hp('10%'),

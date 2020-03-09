@@ -24,7 +24,7 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
        produitPrice=produit.price*produit.quantity
     })
 
-    const data = await fetch("http://10.2.5.179:3000/infoPanier", {
+    const data = await fetch("http://10.2.5.179:3000/monPaiement", {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `total=${displayTotalBasket}&produitName=${produitName}&produitQuantity=${produitQuantity}&produitQuantity=${produitPrice}`
@@ -158,7 +158,11 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
 
   function mapStateToProps(state) {
     console.log('state :', state.totalBasket);
-    return { displayTotalBasket: `Payer ${state.totalBasket} €`, displayPanier: state.panier }
+    console.log('state.userId  :', state.userId );
+    return { displayTotalBasket: `Payer ${state.totalBasket} €`, 
+             displayPanier: state.panier,
+             sendUserId: state.userId 
+          }
   }
   
   export default connect(
