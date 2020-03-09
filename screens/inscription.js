@@ -87,7 +87,6 @@ function Inscription({navigation, props}) {
               onChangeText={(value) => setfirstName(value)} 
               value={firstName}
             />
-          
             <TextInput
               placeholder = "Nom"
               style = {styles.inputSmall}
@@ -133,6 +132,7 @@ function Inscription({navigation, props}) {
               <TextInput 
                 placeholder = "Mot de passe"
                 style = {styles.input}
+                secureTextEntry={true}
                 onChangeText={(value) => setPassword_inscription(value)}
                 value={password_inscription}
               />
@@ -148,10 +148,6 @@ function Inscription({navigation, props}) {
 
     );
   }
-
-
-
-
   
   const styles = StyleSheet.create({
     container: {
@@ -177,38 +173,21 @@ function Inscription({navigation, props}) {
     },
     input: {
         flex: 1,
-        paddingTop: 10,
-        paddingRight: 10,
-        paddingBottom: 10,
-        paddingLeft: 0,
         backgroundColor: colors.tertiary,
         borderBottomColor: colors.primary,
         borderBottomWidth:1,
         marginRight: hp('6%'),
         color: '#424242',
     },
-    // inputViewGlobal: {
-    //   marginLeft:hp('2%'), 
-    //   marginRight:hp('2%'), 
-    //   marginBottom:hp('2%')
-    // },
     inputSmall: {
       width: hp('20%'),
       height: hp('4%'),
-      marginBottom: hp('3%'),
+      // marginBottom: hp('3%'),
       marginRight: hp('2%'),
       
       borderBottomColor: colors.primary,
       borderBottomWidth:1
     },
-    // inputLarge: {
-    //   width: hp('42%'),
-    //   height: hp('4%'),
-    //   marginBottom: hp('3%'),
-    //   marginRight: hp('2%'),
-    //   borderBottomColor: 'black',
-    //   borderBottomWidth:1
-    // },
     comment: {
       justifyContent:"center", 
       alignItems:'center',   
