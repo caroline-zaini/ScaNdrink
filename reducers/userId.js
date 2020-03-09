@@ -1,7 +1,7 @@
-export default function(userId = '', action){
+export default function(idUser = '', action){
     if(action.type == 'addUserId'){
-        return action.userId
+        return action.idUser
     } else {
-        return userId
+        return idUser
     }
 }

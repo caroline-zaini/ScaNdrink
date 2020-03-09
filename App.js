@@ -34,9 +34,9 @@ import {Provider} from 'react-redux';
 import token from './reducers/token'
 import panier from './reducers/panier';
 import totalBasket from './reducers/total'
-import userId from './reducers/userId'
+import idUser from './reducers/userId'
 
-const store = createStore(combineReducers({panier, token, totalBasket, userId}));
+const store = createStore(combineReducers({panier, token, totalBasket, idUser}));
 
 var TopNavigator = createMaterialTopTabNavigator({
   Inscription: Inscription,
