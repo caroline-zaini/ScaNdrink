@@ -9,10 +9,32 @@ import colors from '../components/colors';
 
 
 
-function MonPaiement({navigation, displayTotalBasket}) {
+function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
 
   
+  var sendOrderInfo = async() => {
+    var produitName;
+    produitQuantity;
+    produitPrice;
 
+    displayPanier.map((produit, j) => {
+     
+       produitName=produit.name,
+       produitQuantity=produit.quantity 
+       produitPrice=produit.price*produit.quantity
+    })
+
+    const data = await fetch("http://10.2.5.179:3000/infoPanier", {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `total=${displayTotalBasket}&produitName=${produitName}&produitQuantity=${produitQuantity}&produitQuantity=${produitPrice}`
+    })
+
+    var body = await data.json() 
+    console.log('body :', body);
+
+
+  }
 
 
     return (
@@ -76,7 +98,7 @@ function MonPaiement({navigation, displayTotalBasket}) {
           <Button
           buttonStyle={{backgroundColor: colors.secondary, marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
           title = {displayTotalBasket}
-          onPress={() => navigation.navigate('SuiviCommande')}
+          onPress={() => sendOrderInfo(), navigation.navigate('SuiviCommande')}
           />
          
       
@@ -90,7 +112,7 @@ function MonPaiement({navigation, displayTotalBasket}) {
   }
   
   const styles = StyleSheet.create({
-    conatainer: {
+    container: {
       flex:1, 
       backgroundColor:'#F9F9F9'
     },
@@ -136,10 +158,13 @@ function MonPaiement({navigation, displayTotalBasket}) {
 
   function mapStateToProps(state) {
     console.log('state :', state.totalBasket);
-    return { displayTotalBasket: `Payer ${state.totalBasket} €` }
+    return { displayTotalBasket: `Payer ${state.totalBasket} €`, displayPanier: state.panier }
   }
   
   export default connect(
     mapStateToProps,
     null
   )(MonPaiement);
+
+
+ 

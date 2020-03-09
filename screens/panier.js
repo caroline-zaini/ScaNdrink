@@ -28,43 +28,38 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
     })
 
 
-    var sendOrderInfo = async() => {
-
-      const data = await fetch("http://10.2.5.179:3000/panier", {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `total=${total}`
-      })
-
-      var body = await data.json() 
-      console.log('body :', body);
-    }
+   
 
     return (
   
     <View style={{flex:1}}>
-       <ScrollView>
+       
+       
 
-          <View>
+            <View>
             <StatusBar barStyle="light-content" />
-          </View>
-  
-          <View style={styles.container}>
-
-            <View style={styles.produitContainer}>
-                {listPanier}
             </View>
+
+            <ScrollView style={{backgroundColor: colors.tertiary}}>
+  
+            {/* <View style={styles.produitContainer}> */}
+            {listPanier}
+            {/* </View> */}
+
+            </ScrollView>
 
             <View style={styles.totalContainer}>
-              <View style={{width: wp('80%'), paddingLeft: '20%'}}>
-                <Text>Total de votre commande:</Text>
+              
+              <View style={{width: wp('80%'), paddingLeft: '5%'}}>
+              <Text style={{ fontWeight: 'bold', fontSize:hp('1.8%')}}>Total de votre commande:</Text>
               </View>
+
               <View style={{width: wp('20%')}}>
-                  <Text style={styles.prixProduit}>{total}€</Text>
+              <Text style={{fontWeight: 'bold', fontSize:hp('1.8%')}}>{total}€</Text>
               </View>
+
             </View>
          
-          </View>
 
          {/* <Bouton title='ETAPE SUIVANTE' destination='Inscription' /> */}
          <Button
@@ -73,8 +68,6 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
             onPress= {() => {takeTotalOnClick(total), navigation.navigate('Inscription')}}
             />
 
-        </ScrollView>
-      
     </View>
 
     );
@@ -82,25 +75,33 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
   
   const styles = StyleSheet.create({
     container: {
-      height: hp('81%'),
+      backgroundColor: colors.tertiary,
     },
     produitContainer: {
       justifyContent: 'center',
       alignItems:'center',
       marginTop: hp('4%'),
-      marginBottom:hp('7%'),
+      height: hp('20%')
+   
     },
     totalContainer: {
       flexDirection: 'row',
+    
+      marginTop: hp('2%'),
+      marginBottom: hp('2%'),
       height: hp('10%'),
       backgroundColor: colors.tertiary,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    btn :{
-      padding: hp('0.5%'),
-      marginTop: hp('0.5%'),
-      alignContent: 'center'
+
+    btn: {
+      backgroundColor: colors.secondary, 
+      marginLeft:hp('7%'), 
+      marginRight:hp('7%'), 
+      marginBottom:hp('5%'),
+      height:hp('6%'),
+     
     },
   });
 
