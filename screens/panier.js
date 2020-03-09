@@ -16,7 +16,7 @@ import ProduitPanier from '../components/ProduitPanier';
 
 
 
-function Panier({displayPanier, navigation}) {
+function Panier({displayPanier, navigation, takeTotalOnClick}) {
 
     var total = 0;
 
@@ -70,7 +70,7 @@ function Panier({displayPanier, navigation}) {
          <Button
             buttonStyle={styles.btn}
             title="ETAPE SUIVANTE"
-            onPress= {() => {sendOrderInfo(), navigation.navigate('Inscription')}}
+            onPress= {() => {takeTotalOnClick(total), navigation.navigate('Inscription')}}
             />
 
         </ScrollView>
@@ -104,7 +104,16 @@ function Panier({displayPanier, navigation}) {
     return { displayPanier: state.panier }
   }
 
+  function mapDispatchToProps(dispatch) {
+    return {
+      takeTotalOnClick: function(total) {
+        dispatch( { type: 'takeTotal', total: total} )
+        console.log('total :', total);
+      }
+    }
+  }
+
   export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )(Panier);

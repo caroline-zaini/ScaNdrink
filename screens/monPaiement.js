@@ -9,17 +9,9 @@ import colors from '../components/colors';
 
 
 
-function MonPaiement({navigation}, props) {
+function MonPaiement({navigation, displayTotalBasket}) {
 
-  // var total = 0;
-
-  console.log('props.displayPanier dans paiement :', props.displayPanier);
-  console.log('');
-
-  // var listPanier = props.displayPanier.map((produit, j) => {
-  //   total += produit.price*produit.quantity;
-    
-  // })
+  
 
 
 
@@ -83,7 +75,7 @@ function MonPaiement({navigation}, props) {
 
           <Button
           buttonStyle={{backgroundColor: colors.secondary, marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
-          title = "Payer 3,20 €"
+          title = {displayTotalBasket}
           onPress={() => navigation.navigate('SuiviCommande')}
           />
          
@@ -143,8 +135,8 @@ function MonPaiement({navigation}, props) {
   });
 
   function mapStateToProps(state) {
-    console.log('state :', state.panier);
-    return { displayPanier: state.panier }
+    console.log('state :', state.totalBasket);
+    return { displayTotalBasket: `Payer ${state.totalBasket} €` }
   }
   
   export default connect(
