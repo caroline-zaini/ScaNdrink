@@ -12,7 +12,11 @@ import Categorie from '../components/Categorie';
 import Produit from '../components/Produit';
 
 
+
 function Menu(props)  {
+
+  // const [categorie, setCategorie] = useState('')
+  // const [product, setProduct] = useState('')
 
   var produits = [
    {

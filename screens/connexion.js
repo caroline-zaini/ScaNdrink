@@ -33,7 +33,7 @@ function Connexion({navigation, props}) {
     
     console.log('la',email_connexion)
 
-   const data = await fetch("http://10.2.5.179:3000/connexion", {
+   const data = await fetch("http://10.2.5.172:3000/connexion", {
      method: 'POST',
      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
      body: `email_connexion=${email_connexion}&password_connexion=${password_connexion}`
