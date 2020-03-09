@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { connect } from 'react-redux'
 import Bouton from '../components/Bouton';
-
 //Import scanner qr code
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
@@ -10,7 +9,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import colors from '../components/colors';
 
-export default function Scan() {
+export default function Scan({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -22,20 +21,28 @@ export default function Scan() {
   }, []);
 
   const handleBarCodeScanned = async({ type, data }) => {
-    setScanned(true);
+
+      setScanned(true);
+    
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     console.log(data)
-    const qrCode = await fetch("http://10.2.5.179:3000/inscription", {
+    const qrCode = await fetch("http://10.2.5.172:3000/qrcode", {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `qrCodeFromFront=${data}`
-      })
-      console.log(data)
+      })  
+  
       var body = await qrCode.json() 
-  };
+      navigation.navigate('Menu')
+    };
+    
+    console.log("--------", scanned)
 
-
-
+    // Passage au menu après 
+    if(scanned == true){
+      navigation.navigate('Menu')
+    }
+     
   if (hasPermission === null) {
     return <Text>Autoriser l'utilisation de la caméra</Text>;
   }
@@ -52,7 +59,7 @@ export default function Scan() {
       }}>  
               
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={scanned ? null : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
         <View style={styles.top}></View>

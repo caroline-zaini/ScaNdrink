@@ -10,7 +10,7 @@ import colors from '../components/colors';
 
 
 
-function Inscription({navigation, addToken}) {
+function Inscription({navigation, addToken, addUserId}) {
 
     const [firstName, setfirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -26,7 +26,7 @@ function Inscription({navigation, addToken}) {
        console.log('la',firstName)
     
 
-      const data = await fetch("http://10.2.5.179:3000/inscription", {
+      const data = await fetch("http://10.2.5.172:3000/inscription", {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `firstNameFromFront=${firstName}&lastNameFromFront=${lastName}&email_inscription=${email_inscription}&phone=${phone}&password_inscription=${password_inscription}`
@@ -37,8 +37,10 @@ function Inscription({navigation, addToken}) {
 
       if(body.result == true){
         addToken(body.token)
+        // addUserId(body.userId)
         setUserExist(true)
-        console.log('userExist :', userExist);
+       
+        console.log('========userExist :', userExist);
 
       } else {
         setError_inscription(body.error)
@@ -48,7 +50,7 @@ function Inscription({navigation, addToken}) {
     var tabError= listError_inscription.map((error,i) => {
       return(<Text style = {styles.comment}>{error}</Text>)
     })
-
+   
     var button;
     if (userExist) {
     button = <Button
@@ -210,7 +212,11 @@ function Inscription({navigation, addToken}) {
     return {
       addToken: function(token){
         dispatch({type: 'addToken', token: token})
-      }
+      },
+      // addUserId: function(userId){
+      //   dispatch({type: 'addUserId', userId: userId})
+        
+      // }
     }
   }
 

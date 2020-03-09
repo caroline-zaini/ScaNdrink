@@ -34,8 +34,9 @@ import {Provider} from 'react-redux';
 import token from './reducers/token'
 import panier from './reducers/panier';
 import totalBasket from './reducers/total'
+import userId from './reducers/userId'
 
-const store = createStore(combineReducers({panier, token, totalBasket}));
+const store = createStore(combineReducers({panier, token, totalBasket, userId}));
 
 var TopNavigator = createMaterialTopTabNavigator({
   Inscription: Inscription,
@@ -69,21 +70,24 @@ var TopNavigator = createMaterialTopTabNavigator({
     Scan: {
       screen: Scan,
       navigationOptions: {
-        title: 'Scannes ta table',
+        title: 'Scanne ta table',
         headerStyle: {
-          backgroundColor: colors.primary,
-          
+          backgroundColor: colors.primary,  
           poisition : 'relative'
-         }
+         },
+         headerTintColor: colors.tertiary,
+         headerBackTitle: '',
         }
       },
     Menu: {
       screen: Menu,
       navigationOptions: {
-        title: 'Menu',
+        title: 'Le Prétexte Bar',
         headerStyle: {
           backgroundColor: colors.primary,
-        }
+        },
+        headerTintColor: colors.tertiary,
+         headerBackTitle: '',
       }
     },
     Panier: {

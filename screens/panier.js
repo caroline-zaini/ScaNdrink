@@ -41,11 +41,17 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
             </View>
 
             <ScrollView style={{backgroundColor: colors.tertiary}}>
+<<<<<<< HEAD
   
             {/* <View style={styles.produitContainer}> */}
             {listPanier}
             {/* </View> */}
 
+=======
+           
+            {listPanier}
+         
+>>>>>>> 5e8c21b4d04d3919fe0dc23cc0739092eba46a09
             </ScrollView>
 
             <View style={styles.totalContainer}>
@@ -76,17 +82,9 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: colors.tertiary,
-    },
-    produitContainer: {
-      justifyContent: 'center',
-      alignItems:'center',
-      marginTop: hp('4%'),
-      height: hp('20%')
-   
-    },
+    },  
     totalContainer: {
       flexDirection: 'row',
-    
       marginTop: hp('2%'),
       marginBottom: hp('2%'),
       height: hp('10%'),
