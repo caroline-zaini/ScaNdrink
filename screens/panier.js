@@ -96,7 +96,12 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
       backgroundColor: colors.tertiary,
       alignItems: 'center',
       justifyContent: 'center',
-    }
+    },
+    btn :{
+      padding: hp('0.5%'),
+      marginTop: hp('0.5%'),
+      alignContent: 'center'
+    },
   });
 
   function mapStateToProps(state) {
