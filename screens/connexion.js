@@ -10,13 +10,14 @@ import colors from '../components/colors';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 
 
 
 
-function Connexion({navigation, props}) {
+function Connexion({navigation, addToken}) {
 
   
   const [email_connexion, setEmail_connexion] = useState('')
@@ -47,7 +48,7 @@ function Connexion({navigation, props}) {
    if(body.result){
     
     setUserExist(true)
-    //  props.addToken(body.token)
+    addToken(body.token)
     
      console.log('userExist :', userExist);
     
@@ -102,7 +103,7 @@ function Connexion({navigation, props}) {
               style={styles.searchIcon}
               name="envelope"
               size={15}
-              color="black"
+              color={colors.primary}
               />
             <TextInput
              placeholder = "Email"
@@ -116,11 +117,12 @@ function Connexion({navigation, props}) {
               style={styles.searchIcon}
               name="lock"
               size={20}
-              color="black"
+              color={colors.primary}
               />
             <TextInput
               placeholder = "Mot de Passe"
               style={styles.input}
+              secureTextEntry={true}
               onChangeText={(value) => setPassword_connexion(value)} 
               value={password_connexion}
             />
@@ -155,7 +157,7 @@ function Connexion({navigation, props}) {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: colors.tertiary,
     },
     searchIcon: {
         padding: 10,
@@ -167,8 +169,8 @@ function Connexion({navigation, props}) {
         paddingRight: 10,
         paddingBottom: 10,
         paddingLeft: 0,
-        backgroundColor: '#fff',
-        borderBottomColor: 'black',
+        backgroundColor: colors.tertiary,
+        borderBottomColor: colors.primary,
         borderBottomWidth:1,
         marginRight: hp('7%'),
         color: '#424242',
@@ -181,7 +183,7 @@ function Connexion({navigation, props}) {
       color: 'grey'
     },
     btn: {
-      backgroundColor: '#50bda1', 
+      backgroundColor: colors.secondary, 
       marginLeft:hp('7%'), 
       marginRight:hp('7%'), 
       marginTop: hp('4%'), 

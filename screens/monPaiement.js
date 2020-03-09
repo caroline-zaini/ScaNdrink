@@ -9,18 +9,32 @@ import colors from '../components/colors';
 
 
 
-function MonPaiement({navigation}, props) {
+function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
 
-  // var total = 0;
+  
+  var sendOrderInfo = async() => {
+    var produitName;
+    produitQuantity;
+    produitPrice;
 
-  console.log('props.displayPanier dans paiement :', props.displayPanier);
-  console.log('');
+    displayPanier.map((produit, j) => {
+     
+       produitName=produit.name,
+       produitQuantity=produit.quantity 
+       produitPrice=produit.price*produit.quantity
+    })
 
-  // var listPanier = props.displayPanier.map((produit, j) => {
-  //   total += produit.price*produit.quantity;
-    
-  // })
+    const data = await fetch("http://10.2.5.179:3000/infoPanier", {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `total=${displayTotalBasket}&produitName=${produitName}&produitQuantity=${produitQuantity}&produitQuantity=${produitPrice}`
+    })
 
+    var body = await data.json() 
+    console.log('body :', body);
+
+
+  }
 
 
     return (
@@ -83,8 +97,8 @@ function MonPaiement({navigation}, props) {
 
           <Button
           buttonStyle={{backgroundColor: colors.secondary, marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
-          title = "Payer 3,20 €"
-          onPress={() => navigation.navigate('SuiviCommande')}
+          title = {displayTotalBasket}
+          onPress={() => sendOrderInfo(), navigation.navigate('SuiviCommande')}
           />
          
       
@@ -98,7 +112,7 @@ function MonPaiement({navigation}, props) {
   }
   
   const styles = StyleSheet.create({
-    conatainer: {
+    container: {
       flex:1, 
       backgroundColor:'#F9F9F9'
     },
@@ -143,11 +157,14 @@ function MonPaiement({navigation}, props) {
   });
 
   function mapStateToProps(state) {
-    console.log('state :', state.panier);
-    return { displayPanier: state.panier }
+    console.log('state :', state.totalBasket);
+    return { displayTotalBasket: `Payer ${state.totalBasket} €`, displayPanier: state.panier }
   }
   
   export default connect(
     mapStateToProps,
     null
   )(MonPaiement);
+
+
+ 

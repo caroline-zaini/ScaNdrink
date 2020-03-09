@@ -128,7 +128,7 @@ var styles = StyleSheet.create({
         borderRadius: 400/2,
     },
     nomProduit: {
-        fontWeight: '700',
+        fontWeight: '500',
         fontSize: 16
     },
     quantitéProduit: {

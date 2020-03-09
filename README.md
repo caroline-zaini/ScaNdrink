@@ -9,4 +9,4 @@ git clone https://github.com/MadameZ/ScaNdrink.git
 - npm i react-native-progress-steps
 - npm install --save uid2
 - npm install crypto-js --save 
- 
+- expo install expo-barcode-scanner
