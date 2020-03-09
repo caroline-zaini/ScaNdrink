@@ -10,7 +10,7 @@ import colors from '../components/colors';
 
 
 
-function Inscription({navigation, props}) {
+function Inscription({navigation, addToken}) {
 
     const [firstName, setfirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -36,7 +36,7 @@ function Inscription({navigation, props}) {
       console.log('body.result :', body.result);
 
       if(body.result == true){
-        // props.addToken(body.token)
+        addToken(body.token)
         setUserExist(true)
         console.log('userExist :', userExist);
 
@@ -93,7 +93,8 @@ function Inscription({navigation, props}) {
               onChangeText={(value) => setLastName(value)} 
               value={lastName}
             />
-            </View>
+          </View>
+
             <View style={{flexDirection:'row', marginLeft: hp('4%'),}}>
               <Icon
                 style={styles.searchIcon}

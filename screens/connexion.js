@@ -17,7 +17,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 
-function Connexion({navigation, props}) {
+function Connexion({navigation, addToken}) {
 
   
   const [email_connexion, setEmail_connexion] = useState('')
@@ -48,7 +48,7 @@ function Connexion({navigation, props}) {
    if(body.result){
     
     setUserExist(true)
-    //  props.addToken(body.token)
+    addToken(body.token)
     
      console.log('userExist :', userExist);
     
