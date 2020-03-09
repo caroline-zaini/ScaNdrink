@@ -158,10 +158,10 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
 
   function mapStateToProps(state) {
     console.log('state :', state.totalBasket);
-    console.log('state.userId  :', state.userId );
+    console.log('state.idUser  :', state.idUser );
     return { displayTotalBasket: `Payer ${state.totalBasket} €`, 
              displayPanier: state.panier,
-             sendUserId: state.userId 
+             sendUserId: state.idUser 
           }
   }
   

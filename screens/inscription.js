@@ -37,10 +37,15 @@ function Inscription({navigation, addToken, addUserId}) {
 
       if(body.result == true){
         addToken(body.token)
-        // addUserId(body.userId)
+        console.log('body :', body);
+        console.log('body.token :', body.token);
+        console.log('body.userId from front:', body.idUser);
+        
+
+        addUserId(body.idUser)
         setUserExist(true)
        
-        console.log('========userExist :', userExist);
+        console.log('======== userExist :', userExist);
 
       } else {
         setError_inscription(body.error)
@@ -213,10 +218,10 @@ function Inscription({navigation, addToken, addUserId}) {
       addToken: function(token){
         dispatch({type: 'addToken', token: token})
       },
-      // addUserId: function(userId){
-      //   dispatch({type: 'addUserId', userId: userId})
+      addUserId: function(idUser){
+        dispatch({type: 'addUserId', idUser: idUser})
         
-      // }
+      }
     }
   }
 
