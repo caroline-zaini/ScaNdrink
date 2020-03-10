@@ -20,8 +20,6 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
 
     var total = 0;
 
-    console.log('displayPanier :', displayPanier);
-
     var listPanier = displayPanier.map((produit, j) => {
       total += produit.price*produit.quantity;
       return <ProduitPanier key={j} produitName={produit.name} produitQuantity={produit.quantity} produitPrice={produit.price*produit.quantity} />
@@ -41,17 +39,9 @@ function Panier({displayPanier, navigation, takeTotalOnClick}) {
             </View>
 
             <ScrollView style={{backgroundColor: colors.tertiary}}>
-<<<<<<< HEAD
-  
-            {/* <View style={styles.produitContainer}> */}
-            {listPanier}
-            {/* </View> */}
-
-=======
            
             {listPanier}
          
->>>>>>> 5e8c21b4d04d3919fe0dc23cc0739092eba46a09
             </ScrollView>
 
             <View style={styles.totalContainer}>
