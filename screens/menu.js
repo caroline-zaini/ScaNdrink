@@ -228,8 +228,15 @@ var styles = StyleSheet.create({
     color: colors.primary,
   }
 
-
 });
+
+function mapDispatchToProps(dispatch) {
+  return {
+      addTokenTable: function(token) {
+          dispatch( {type: 'addTokenTable', tokenTable: token }) 
+      }
+  }
+}
 
 function mapStateToProps(state) {
   console.log('state :', state.panier);
@@ -237,6 +244,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(
+  mapDispatchToProps,
   mapStateToProps,
   null
 )(Menu);
