@@ -15,8 +15,7 @@ import Produit from '../components/Produit';
 
 function Menu(props)  {
 
-  // const [categorie, setCategorie] = useState('')
-  // const [product, setProduct] = useState('')
+  const [categories, setCategorie] = useState(null);
 
   var produits = [
    {
@@ -104,6 +103,25 @@ function Menu(props)  {
     {name: 'Softs', img: require(`../assets/images/soft.jpg`)},
     {name: 'Vins', img: require(`../assets/images/vins.jpg`)}
   ];
+
+  useEffect(() => {
+    var loadMenu = async () => {
+      const dataTable = await fetch('/load-menu', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `restoToken=${props.restoToken}`
+      })
+      var myResponse = await dataTable.json();
+  
+      if (myResponse.allMenu !== undefined) {
+        setCategorie([...categories, myResponse.categorie])
+        //Une categorie doit imperativement être disposée de la manière suivante:
+        //{name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: [{name: xx, price: xx, quantity: xx, litre: xx}] },
+      }
+    }
+    loadMenu();
+
+  }, []);
 
   const [produitsData, setProduitsData] = useState(categoriesData[0].produits);
 
