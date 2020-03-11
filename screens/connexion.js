@@ -17,7 +17,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 
-function Connexion({navigation, addToken}) {
+function Connexion({navigation, addToken, addUserId}) {
 
   
   const [email_connexion, setEmail_connexion] = useState('')
@@ -34,7 +34,7 @@ function Connexion({navigation, addToken}) {
     
     console.log('la',email_connexion)
 
-   const data = await fetch("http://10.2.5.210:3000/connexion", {
+   const data = await fetch("http://10.2.5.179:3000/connexion", {
      method: 'POST',
      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
      body: `email_connexion=${email_connexion}&password_connexion=${password_connexion}`
@@ -49,8 +49,11 @@ function Connexion({navigation, addToken}) {
     
     setUserExist(true)
     addToken(body.token)
+    addUserId(body.idUser)
     
+    console.log('=========');
      console.log('userExist :', userExist);
+     console.log('body.idUser from connexion :', body.idUser);
     
      
    } else {
@@ -74,7 +77,7 @@ function Connexion({navigation, addToken}) {
   button = <Button
           buttonStyle={styles.btn}
           title="SE CONNECTER"
-          onPress= {() => {console.log('ic'),sendUserInfo_Connexion()}}
+          onPress= {() => {sendUserInfo_Connexion()}}
           />
   }
 
@@ -196,6 +199,10 @@ function Connexion({navigation, addToken}) {
     return {
       addToken: function(token){
         dispatch({type: 'addToken', token: token})
+      },
+      addUserId: function(idUser){
+        dispatch({type: 'addUserId', idUser: idUser})
+        
       }
     }
   }
