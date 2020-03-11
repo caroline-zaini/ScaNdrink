@@ -34,7 +34,7 @@ function Connexion({navigation, addToken}) {
     
     console.log('la',email_connexion)
 
-   const data = await fetch("http://10.2.5.172:3000/connexion", {
+   const data = await fetch("http://10.2.5.210:3000/connexion", {
      method: 'POST',
      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
      body: `email_connexion=${email_connexion}&password_connexion=${password_connexion}`
@@ -67,7 +67,7 @@ function Connexion({navigation, addToken}) {
   button = <Button
           buttonStyle={styles.btn}
           title="SE CONNECTER"
-          onPress= {() => {console.log('ic'),sendUserInfo_Connexion(), navigation.navigate('MonPaiement')}}
+          onPress= {() => {sendUserInfo_Connexion(), navigation.navigate('MonPaiement')}}
           />
    
   } else {

@@ -51,30 +51,30 @@ export default function Scan({navigation}) {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        
-      }}>  
+    <View 
+    style={styles.container}
+    >  
               
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? null : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-        <View style={styles.top}></View>
-       
-        <View style={styles.buttom}>
-        <Bouton
-          title='Menu' destination='Menu'
-          style={styles.bouton}
-          />
-      <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
+      <BarCodeScanner onBarCodeScanned={scanned ? null : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
+
+      <View style={styles.top}></View>
+
+      <View style={styles.left}></View>
+      <View style={styles.right}></View>
+
+      <View style={styles.buttomMid}></View>
       
-{/* <Bouton
-          title={'Appuyer pour voir le menu'} onPress={() => setScanned(false)}
-          /> */}
-    </View>
+      <View style={styles.buttom}>
+
+
+{/* BOUTON A SUPPRIMER LORS DU BON FONCTIONNEMENT DU QR CODE */}
+
+      <Bouton title='Menu' destination='Menu' style={styles.bouton}/>
+      <Bouton title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
+
+{/* BOUTON A SUPPRIMER LORS DU BON FONCTIONNEMENT DU QR CODE */}
+      
+      </View>
     </View>
   );
 }
@@ -84,31 +84,45 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: 'black'
-        ,
+        backgroundColor: colors.primary,
     },
     top: {
         backgroundColor: colors.primary,
         position:'absolute',
-        height: hp('15%'),
+        height: hp('25%'),
         position: 'relative',
-        marginTop: hp('0%')
+        opacity: 0.3
     },
     buttom: {
-        height: hp('25%'),
+        height: hp('26%'),
         backgroundColor: colors.primary,
         position: 'relative',
-        marginTop: hp('50%')
     },
     left:{
-        height: hp('25%'),
-        width: wp('25%'),
+      backgroundColor: colors.primary,
+        height: hp('50%'),
+        width: wp('10%'),
         position: 'relative',
+        opacity: 0.3
     },
-    bouton: {
-        marginTop: hp('8%'),
-        position:'relative',
-        // verticalAlign: 'center'
+    right:{
+      backgroundColor: colors.primary,
+        height: hp('35.75%'),
+        width: wp('10%'),
+        marginLeft: 'auto',
+        marginTop: 'auto',
+        position: 'relative',
+        opacity: 0.3
     },
+    buttomMid: {
+      backgroundColor: colors.primary,
+      position:'absolute',
+      height: hp('5%'),
+      position: 'relative',
+      marginLeft: hp('5.3%'),
+      opacity: 0.3
+
+  },
+
 
 })
