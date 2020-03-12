@@ -9,29 +9,28 @@ import colors from '../components/colors';
 
 
 
-function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
+function MonPaiement({navigation, displayPanier, displayTotalBasket, sendUserId}) {
 
   
   var sendOrderInfo = async() => {
-    var produitName;
-    produitQuantity;
-    produitPrice;
+    
 
-    displayPanier.map((produit, j) => {
-     
-       produitName=produit.name,
-       produitQuantity=produit.quantity 
-       produitPrice=produit.price*produit.quantity
-    })
+    var panierSend = JSON.stringify(displayPanier)
+
+
+    console.log('panierSend :', panierSend);
 
     const data = await fetch("http://10.2.5.179:3000/monPaiement", {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `total=${displayTotalBasket}&produitName=${produitName}&produitQuantity=${produitQuantity}&produitQuantity=${produitPrice}`
+      body: `total=${displayTotalBasket}&idUser=${sendUserId}&panierSend=${panierSend}`
     })
 
     var body = await data.json() 
     console.log('body :', body);
+
+    
+  
 
 
   }
@@ -97,8 +96,8 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
 
           <Button
           buttonStyle={{backgroundColor: colors.secondary, marginLeft:hp('7%'), marginRight:hp('7%'), height:hp('6%')}}
-          title = {displayTotalBasket}
-          onPress={() => sendOrderInfo(), navigation.navigate('SuiviCommande')}
+          title = {`Payer ${displayTotalBasket} €`}
+          onPress={() => {sendOrderInfo(), navigation.navigate('SuiviCommande')}}
           />
          
       
@@ -157,9 +156,11 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket}) {
   });
 
   function mapStateToProps(state) {
-    console.log('state :', state.totalBasket);
+
+    console.log('state.totalBasket :', state.totalBasket);
     console.log('state.idUser  :', state.idUser );
-    return { displayTotalBasket: `Payer ${state.totalBasket} €`, 
+
+    return { displayTotalBasket: state.totalBasket, 
              displayPanier: state.panier,
              sendUserId: state.idUser 
           }

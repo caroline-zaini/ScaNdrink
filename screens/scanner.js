@@ -60,31 +60,39 @@ function Scan(props) {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        
-      }}>  
+    <View 
+    style={styles.container}
+    >  
               
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? null : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-        <View style={styles.top}></View>
-       
-        <View style={styles.buttom}>
-        <Bouton
-          title='Menu' destination='Menu'
-          style={styles.bouton}
-          />
-      <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
+      <BarCodeScanner onBarCodeScanned={scanned ? null : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
+
+      <View style={styles.top}></View>
+        <Text style={{color: 'black', textAlign:'center', fontSize: 18, opacity: 0.3, backgroundColor: colors.primary }}>Scan le QR Code pour passer commande</Text>
+      <View style={styles.topOpacity}></View>
+
+      <View style={{flexDirection: 'row', justifyContent : 'space-between'}}>
+        <View style={styles.left}></View>
+        <View style={styles.right}></View>
+      </View>
+
+      <View style={styles.buttomOpacity}></View>
+
+      <View style={styles.buttomAdd}></View>
+
+      <View style={styles.buttom}>
+
+      {/* <Bouton title='Menu' destination='Menu'/> */}
+      <Bouton style={styles.btn} title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>
+
+      </View>
+
       
-{/* <Bouton
-          title={'Appuyer pour voir le menu'} onPress={() => setScanned(false)}
-          /> */}
+
+
     </View>
-    </View>
+
+    
+    
   );
 }
 
@@ -93,32 +101,65 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: 'black'
-        ,
+        backgroundColor: colors.primary,
+        // backgroundColor: 'red',
     },
     top: {
         backgroundColor: colors.primary,
-        position:'absolute',
         height: hp('15%'),
-        position: 'relative',
-        marginTop: hp('0%')
+        width:hp('100%'),
+        opacity: 0.3,
     },
+    topOpacity: {
+      backgroundColor: colors.primary,
+      // backgroundColor: 'brown',
+      height: hp('5%'),
+      width:hp('100%'),
+      opacity: 0.3,
+  },
+        left:{
+      backgroundColor: colors.primary,
+        // backgroundColor: 'green',
+        height: hp('45%'),
+        width: wp('10%'),
+        opacity: 0.3
+    },
+        right:{
+      backgroundColor: colors.primary,
+        // backgroundColor: 'yellow',
+        height: hp('45%'),
+        width: wp('10%'),
+        opacity: 0.3
+    },
+    buttomOpacity: {
+      height: hp('5%'),
+      backgroundColor: colors.primary,
+      opacity: 0.3,
+      // backgroundColor: 'pink',
+      position: 'relative',
+  },
+  buttomAdd: {
+      height: hp('5%'),
+      backgroundColor: colors.primary,
+      // backgroundColor: 'orange',
+      position: 'relative',
+      opacity: 0.3,
+  },
+
     buttom: {
-        height: hp('25%'),
+        height: hp('30%'),
         backgroundColor: colors.primary,
+        // backgroundColor: 'red',
         position: 'relative',
-        marginTop: hp('50%')
+        opacity: 0.3,
     },
-    left:{
-        height: hp('25%'),
-        width: wp('25%'),
-        position: 'relative',
-    },
-    bouton: {
-        marginTop: hp('8%'),
-        position:'relative',
-        // verticalAlign: 'center'
-    },
+    btn: {
+      backgroundColor: 'red',
+      position: 'relative',
+  },
+
+
+
 
 })
 
