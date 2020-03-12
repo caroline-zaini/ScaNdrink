@@ -58,7 +58,7 @@ export default function Scan({navigation}) {
       <BarCodeScanner onBarCodeScanned={scanned ? null : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}/>
 
       <View style={styles.top}></View>
-
+        <Text style={{color: 'black', textAlign:'center', fontSize: 18, opacity: 0.3, backgroundColor: colors.primary }}>Scan le QR Code pour passer commande</Text>
       <View style={styles.topOpacity}></View>
 
       <View style={{flexDirection: 'row', justifyContent : 'space-between'}}>
