@@ -35,8 +35,10 @@ import token from './reducers/token'
 import panier from './reducers/panier';
 import totalBasket from './reducers/total'
 import idUser from './reducers/userId'
+import tokenResto from './reducers/tokenResto'
+import tokenTable from './reducers/tokenTable'
 
-const store = createStore(combineReducers({panier, token, totalBasket, idUser}));
+const store = createStore(combineReducers({panier, token, totalBasket, idUser, tokenResto, tokenTable}));
 
 var TopNavigator = createMaterialTopTabNavigator({
   Inscription: Inscription,

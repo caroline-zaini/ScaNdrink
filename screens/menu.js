@@ -2,7 +2,7 @@ console.disableYellowBox = true;
 
 import React, { useState, useEffect }  from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import colors from '../components/colors';
 import Bouton from '../components/Bouton';
@@ -106,21 +106,23 @@ function Menu(props)  {
 
   useEffect(() => {
     var loadMenu = async () => {
-      const dataTable = await fetch('/load-menu', {
+      const dataTable = await fetch('http://10.2.5.247:3000/load-menu', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `restoToken=${props.restoToken}`
+        body: `restoToken=${props.displayTokenResto}`
       })
+
       var myResponse = await dataTable.json();
-  
+
       if (myResponse.allMenu !== undefined) {
-        setCategorie([...categories, myResponse.categorie])
+        console.log('myResponse.allMenu :', myResponse.allMenu);
+        setCategorie(myResponse.allMenu)
         //Une categorie doit imperativement être disposée de la manière suivante:
         //{name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: [{name: xx, price: xx, quantity: xx, litre: xx}] },
+        props.addTokenTable(props.tableToken);
       }
     }
     loadMenu();
-
   }, []);
 
   const [produitsData, setProduitsData] = useState(categoriesData[0].produits);
@@ -147,7 +149,7 @@ function Menu(props)  {
         if (produit.name == props.displayPanier[i].name && produit.name != undefined)
           quantite = props.displayPanier[i].quantity;
       }
-      console.log('quantite :', quantite);
+
       return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={quantite} produitLitre={produit.litre} displayQuantity={props.displayPanier.quantity} />
     })
   }
@@ -174,9 +176,6 @@ function Menu(props)  {
        {boutonPanier}
       </View>
         
-      
-      
-
     </View>
   );
 }
@@ -233,18 +232,18 @@ var styles = StyleSheet.create({
 function mapDispatchToProps(dispatch) {
   return {
       addTokenTable: function(token) {
+        console.log('token :', token);
           dispatch( {type: 'addTokenTable', tokenTable: token }) 
       }
   }
 }
 
 function mapStateToProps(state) {
-  console.log('state :', state.panier);
-  return { displayPanier: state.panier }
+  console.log('state :', state);
+  return { displayPanier: state.panier, displayTokenResto: state.tokenResto }
 }
 
 export default connect(
-  mapDispatchToProps,
-  mapStateToProps,
-  null
+  mapStateToProps, 
+  mapDispatchToProps
 )(Menu);
