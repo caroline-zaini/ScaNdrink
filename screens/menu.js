@@ -2,7 +2,7 @@ console.disableYellowBox = true;
 
 import React, { useState, useEffect }  from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import colors from '../components/colors';
 import Bouton from '../components/Bouton';
@@ -130,14 +130,14 @@ function Menu(props)  {
   } else {
     var produitList = produitsData.map((produit, j) => {
 
-  var quantite = 0;
-  for (let i = 0; i < props.displayPanier.length; i++) {
-    if (produit.name == props.displayPanier[i].name && produit.name != undefined)
-      quantite = props.displayPanier[i].quantity;
-  }
-  console.log('quantite :', quantite);
-  return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={quantite} produitLitre={produit.litre} displayQuantity={props.displayPanier.quantity} />
-})
+      var quantite = 0;
+      for (let i = 0; i < props.displayPanier.length; i++) {
+        if (produit.name == props.displayPanier[i].name && produit.name != undefined)
+          quantite = props.displayPanier[i].quantity;
+      }
+
+      return <Produit key={j} produitName={produit.name} produitPrice={produit.price} produitQuantity={quantite} produitLitre={produit.litre} displayQuantity={props.displayPanier.quantity} />
+    })
   }
 
   if (props.displayPanier[0]) {
@@ -159,13 +159,10 @@ function Menu(props)  {
 
   <View style={styles.bouton}>
 
-   {boutonPanier}
-  </View>
-    
-  
-  
-
-</View>
+       {boutonPanier}
+      </View>
+        
+    </View>
   );
 }
 
@@ -218,12 +215,21 @@ var styles = StyleSheet.create({
 
 });
 
+function mapDispatchToProps(dispatch) {
+  return {
+      addTokenTable: function(token) {
+        console.log('token :', token);
+          dispatch( {type: 'addTokenTable', tokenTable: token }) 
+      }
+  }
+}
+
 function mapStateToProps(state) {
-  console.log('state :', state.panier);
-  return { displayPanier: state.panier }
+  console.log('state :', state);
+  return { displayPanier: state.panier, displayTokenResto: state.tokenResto }
 }
 
 export default connect(
-  mapStateToProps,
-  null
+  mapStateToProps, 
+  mapDispatchToProps
 )(Menu);

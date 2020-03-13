@@ -1,7 +1,7 @@
 console.disableYellowBox = true;
 
 import React from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View, StatusBar, Image } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import colors from './components/colors';
 /**
@@ -35,8 +35,10 @@ import token from './reducers/token'
 import panier from './reducers/panier';
 import totalBasket from './reducers/total'
 import idUser from './reducers/userId'
+import tokenResto from './reducers/tokenResto'
+import tokenTable from './reducers/tokenTable'
 
-const store = createStore(combineReducers({panier, token, totalBasket, idUser}));
+const store = createStore(combineReducers({panier, token, totalBasket, idUser, tokenResto, tokenTable}));
 
 var TopNavigator = createMaterialTopTabNavigator({
   Inscription: Inscription,
@@ -70,7 +72,7 @@ var TopNavigator = createMaterialTopTabNavigator({
     Scan: {
       screen: Scan,
       navigationOptions: {
-        title: 'Scanne ta table',
+        headerTitle:( <Image source={require('./assets/images/Logo.png')} style={{height:40, width:80, marginLeft: 110, marginTop:5}}/>),
         headerStyle: {
           backgroundColor: colors.primary,  
           poisition : 'relative'
@@ -82,7 +84,7 @@ var TopNavigator = createMaterialTopTabNavigator({
     Menu: {
       screen: Menu,
       navigationOptions: {
-        title: 'Le Prétexte Bar',
+        headerTitle:( <Image source={require('./assets/images/Logo.png')} style={{height:40, width:80, marginLeft: 110, marginTop:5}}/>),
         headerStyle: {
           backgroundColor: colors.primary,
         },
