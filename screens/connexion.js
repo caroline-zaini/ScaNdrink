@@ -29,7 +29,7 @@ function Connexion({navigation, addToken, addUserId}) {
   var sendUserInfo_Connexion = async() =>  {
     setUserExist(true)
 
-   const data = await fetch("http://192.168.0.24:3000/connexion", {
+   const data = await fetch("http://10.2.5.210:3000/connexion", {
      method: 'POST',
      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
      body: `email_connexion=${email_connexion}&password_connexion=${password_connexion}`

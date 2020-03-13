@@ -17,7 +17,7 @@ function Menu(props)  {
   const [product, setProduct] = useState([])
 
   useEffect(async () => {
-    const responseproduct = await fetch('http://10.2.5.179:3000/qrcode')
+    const responseproduct = await fetch('http://10.2.5.210:3000/qrcode')
     const jsonResponse = await responseproduct.json()
     console.log(jsonResponse)
 

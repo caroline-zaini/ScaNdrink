@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -12,6 +12,7 @@ import colors from '../components/colors';
 function MonPaiement({navigation, displayPanier, displayTotalBasket, sendUserId}) {
 
   
+  
   var sendOrderInfo = async() => {
     
 
@@ -20,7 +21,7 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket, sendUserId}
 
     console.log('panierSend :', panierSend);
 
-    const data = await fetch("http://10.2.5.179:3000/monPaiement", {
+    const data = await fetch("http://10.2.5.210:3000/monPaiement", {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `total=${displayTotalBasket}&idUser=${sendUserId}&panierSend=${panierSend}`
@@ -29,6 +30,7 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket, sendUserId}
     var body = await data.json() 
     console.log('monPaiement / body :', body);
 
+  
     
   
 

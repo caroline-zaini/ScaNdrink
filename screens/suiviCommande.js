@@ -9,17 +9,20 @@ import { Input, Text, Badge} from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import { clockRunning } from 'react-native-reanimated';
 
 
 
 function SuiviCommande({sendUserId}) {
 
     const[orderStatus, setOrderStatus] = useState('')
+    const[orderId, setOrderId] = useState ('')
+
 
     useEffect( () => {
 
       const fetchData = async () => {
-        const data = await fetch("http://10.2.5.179:3000/order", {
+        const data = await fetch("http://10.2.5.210:3000/order", {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `idUser=${sendUserId}`
@@ -28,18 +31,24 @@ function SuiviCommande({sendUserId}) {
       var body = await data.json() 
       console.log('monPaiement / body :', body);
       setOrderStatus(body.status)
+
+      setOrderId(body.orderId)
+      console.log('orderId :', orderId);
   
       }
       fetchData();
     
     }, []);
-
+      
       console.log('suiviCommande / orderStatus :', orderStatus);
 
 
       var stepOne;
 
       if (orderStatus == 'Payed') {
+
+        
+        
       
       }
 
@@ -95,9 +104,9 @@ function SuiviCommande({sendUserId}) {
         <View style={{justifyContent:"center", alignItems:'center', marginBottom:hp('15%')}}>
             <Text style= {{fontSize: 18, marginBottom:hp('2%') }}>Votre numéro de commande </Text>
             <Badge
-            value="WC99" 
+            value={orderId.slice(20,24).toUpperCase()}
 
-            badgeStyle={{height:hp('15%'), width: hp('30%'), backgroundColor: colors.primary}}
+            badgeStyle={{height:hp('15%'), width: hp('30%'), backgroundColor: colors.primary, color:"white"}}
             textStyle={{fontSize:40}}
             />
             
