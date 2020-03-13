@@ -72,21 +72,14 @@ export default function Scan({navigation}) {
 
       <View style={styles.buttom}>
 
-      {/* <Bouton title='Menu' destination='Menu'/> */}
-      <Bouton style={styles.btn} title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>
+      <Bouton title='Menu' destination='Menu'/>
+      <Bouton style={{color:'red'}} title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>
 
       </View>
-
-      
-
-
     </View>
-
-    
     
   );
 }
-
 
 var styles = StyleSheet.create({
     container: {
@@ -144,10 +137,10 @@ var styles = StyleSheet.create({
         position: 'relative',
         opacity: 0.3,
     },
-    btn: {
-      backgroundColor: 'red',
-      position: 'relative',
-  },
+  //   btn: {
+  //     backgroundColor: 'red',
+  //     position: 'relative',
+  // },
 
 
 
