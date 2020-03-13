@@ -26,7 +26,7 @@ export default function Scan({navigation}) {
     
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     console.log(data)
-    const qrCode = await fetch("http://10.2.5.172:3000/qrcode", {
+    const qrCode = await fetch("http://10.2.5.179:3000/qrcode", {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: `qrCodeFromFront=${data}`

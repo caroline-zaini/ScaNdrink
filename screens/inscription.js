@@ -23,8 +23,7 @@ function Inscription({navigation, addToken, addUserId}) {
 
 
     var sendUserInfo_Inscription = async() =>  {
-       console.log('la',firstName)
-    
+       
 
       const data = await fetch("http://10.2.5.179:3000/inscription", {
         method: 'POST',
@@ -34,17 +33,14 @@ function Inscription({navigation, addToken, addUserId}) {
 
       var body = await data.json() 
       console.log('body.result :', body.result);
+      setUserExist(true)
 
       if(body.result == true){
+       
         addToken(body.token)
-        console.log('body :', body);
-        console.log('body.token :', body.token);
-        console.log('body.userId from front:', body.idUser);
-        
 
         addUserId(body.idUser)
-        setUserExist(true)
-       
+        
         console.log('======== userExist :', userExist);
 
       } else {
@@ -58,6 +54,7 @@ function Inscription({navigation, addToken, addUserId}) {
    
     var button;
     if (userExist) {
+      console.log('userExist :', userExist);
     button = <Button
             buttonStyle={styles.btn}
             title="S'INSCRIRE"
