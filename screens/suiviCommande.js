@@ -94,7 +94,7 @@ function SuiviCommande({sendUserId}) {
                 </View>
             </ProgressStep>
 
-            <ProgressStep label="Commande prête" previousBtnTextStyle={styles.buttonTextStyle} submitBtnTextStyle={styles.buttonTextStyle}>
+            <ProgressStep label="Commande prête" previousBtnTextStyle={styles.buttonTextStyle} nextBtnTextStyle={styles.buttonTextStyle}>
                 <View style={{ alignItems: 'center' }}>
                 </View>
             </ProgressStep>
