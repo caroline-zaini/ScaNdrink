@@ -4,10 +4,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Text, Button } from 'react-native-elements';
 import colors from '../components/colors';
 
-// primary: '#1e1e1e',
-// secondary: '#50bda1', // Vert bizarre
-// tertiary: '#fff', // Blanc éclatant
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -31,10 +27,9 @@ function Connexion({navigation, addToken, addUserId}) {
   */
 
   var sendUserInfo_Connexion = async() =>  {
-    
-    console.log('la',email_connexion)
+    setUserExist(true)
 
-   const data = await fetch("http://10.2.5.179:3000/connexion", {
+   const data = await fetch("http://192.168.0.24:3000/connexion", {
      method: 'POST',
      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
      body: `email_connexion=${email_connexion}&password_connexion=${password_connexion}`
@@ -47,7 +42,6 @@ function Connexion({navigation, addToken, addUserId}) {
 
    if(body.result){
     
-    setUserExist(true)
     addToken(body.token)
     addUserId(body.idUser)
     

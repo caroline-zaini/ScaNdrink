@@ -27,7 +27,7 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket, sendUserId}
     })
 
     var body = await data.json() 
-    console.log('body :', body);
+    console.log('monPaiement / body :', body);
 
     
   
@@ -157,8 +157,8 @@ function MonPaiement({navigation, displayPanier, displayTotalBasket, sendUserId}
 
   function mapStateToProps(state) {
 
-    console.log('state.totalBasket :', state.totalBasket);
-    console.log('state.idUser  :', state.idUser );
+    console.log('monPaiement / state.totalBasket :', state.totalBasket);
+    console.log('monPaiement /state.idUser  :', state.idUser );
 
     return { displayTotalBasket: state.totalBasket, 
              displayPanier: state.panier,

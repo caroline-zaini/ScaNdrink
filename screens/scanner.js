@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import Bouton from '../components/Bouton';
 //Import scanner qr code
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -9,7 +9,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import colors from '../components/colors';
 
-export default function Scan({navigation}) {
+function Scan(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -24,23 +24,32 @@ export default function Scan({navigation}) {
 
       setScanned(true);
     
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    console.log(data)
-    const qrCode = await fetch("http://10.2.5.172:3000/qrcode", {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `qrCodeFromFront=${data}`
-      })  
-  
-      var body = await qrCode.json() 
-      navigation.navigate('Menu')
+      // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+
+      var restoToken = "";
+      var tableToken = "";
+      var before = false;
+
+      for (let i = 0; i < data.length; i++) {
+        if (data[i] == '/') {
+          before = true;
+          i++;
+        }
+        !before ? restoToken += data[i] : tableToken += data[i];
+      }
+
+      console.log('restoToken :', restoToken);
+      console.log('tableToken :', tableToken);
+
+      props.addTokenTable(tableToken);
+      props.addTokenResto(restoToken);
     };
     
     console.log("--------", scanned)
 
     // Passage au menu après 
     if(scanned == true){
-      navigation.navigate('Menu')
+      // props.navigation.navigate('Menu')
     }
      
   if (hasPermission === null) {
@@ -146,3 +155,19 @@ var styles = StyleSheet.create({
 
 
 })
+
+function mapDispatchToProps(dispatch) {
+  return {
+      addTokenResto: function(token) {
+          dispatch( {type: 'addTokenResto', tokenResto: token }) 
+      },
+      addTokenTable: function(token) {
+        dispatch( {type: 'addTokenTable', tokenTable: token} )
+      }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Scan);

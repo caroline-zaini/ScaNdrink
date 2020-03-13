@@ -1,6 +1,7 @@
-import React, { isValidElement } from 'react';
+import React, { isValidElement, useEffect, useState } from 'react';
 import { StyleSheet, View, StatusBar, Image } from 'react-native';
 import colors from '../components/colors';
+import { connect } from 'react-redux'
 
 
 import { Input, Text, Badge} from 'react-native-elements';
@@ -10,16 +11,37 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 
 
-// const colors = {
-//     // primary: '#1b2d3a', // Bleu foncé (plutôt noir)
-//     primary: '#1e1e1e',
-//     secondary: '#50bda1', // Vert bizarre
-//     tertiary: '#fff', // Blanc éclatant
+
+function SuiviCommande({sendUserId}) {
+
+    const[orderStatus, setOrderStatus] = useState('')
+
+    useEffect( () => {
+
+      const fetchData = async () => {
+        const data = await fetch("http://10.2.5.179:3000/order", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `idUser=${sendUserId}`
+      })
+
+      var body = await data.json() 
+      console.log('monPaiement / body :', body);
+      setOrderStatus(body.status)
+  
+      }
+      fetchData();
     
-// }
+    }, []);
+
+      console.log('suiviCommande / orderStatus :', orderStatus);
 
 
-export default function SuiviCommande() {
+      var stepOne;
+
+      if (orderStatus == 'Payed') {
+      
+      }
 
 
     return (
@@ -50,12 +72,13 @@ export default function SuiviCommande() {
             />
         </View>
 
+
         <ProgressSteps>
 
-            <ProgressStep label="Commande reçue" onNextStep={() => onNextStep()}>
+            <ProgressStep label="Commande reçue" >
                 <View style={{ alignItems: 'center' }}>
                 </View>
-            </ProgressStep>
+             </ProgressStep>
 
             <ProgressStep label="En cours de préparation">
                 <View style={{ alignItems: 'center' }}>
@@ -96,3 +119,18 @@ export default function SuiviCommande() {
       justifyContent: 'center',
     },
   });
+
+  function mapStateToProps(state) {
+
+  
+    console.log('state.idUser  :', state.idUser );
+
+    return { 
+             sendUserId: state.idUser 
+          }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    null
+  )(SuiviCommande);
