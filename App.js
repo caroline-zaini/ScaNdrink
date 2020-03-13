@@ -72,7 +72,7 @@ var TopNavigator = createMaterialTopTabNavigator({
     Scan: {
       screen: Scan,
       navigationOptions: {
-        headerTitle:( <Image source={require('./assets/images/Logo.png')} style={{height:40, width:80, marginLeft: 110, marginTop:5}}/>),
+        headerTitle:( <Image source={require('./assets/images/Logo.png')} style={{height:40, width:80, marginLeft: wp('33%'), marginTop:5}}/>),
         headerStyle: {
           backgroundColor: colors.primary,  
           poisition : 'relative'
@@ -84,7 +84,7 @@ var TopNavigator = createMaterialTopTabNavigator({
     Menu: {
       screen: Menu,
       navigationOptions: {
-        headerTitle:( <Image source={require('./assets/images/Logo.png')} style={{height:40, width:80, marginLeft: 110, marginTop:5}}/>),
+        headerTitle:( <Image source={require('./assets/images/Logo.png')} style={{height:40, width:80, marginLeft: wp('18%'), marginTop:5}}/>),
         headerStyle: {
           backgroundColor: colors.primary,
         },

@@ -11,26 +11,18 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Categorie from '../components/Categorie';
 import Produit from '../components/Produit';
 
+
+
 function Menu(props)  {
 
-  // const [category, setCategory] = useState('')
-  const [product, setProduct] = useState([])
-
-  useEffect(async () => {
-    const responseproduct = await fetch('http://10.2.5.210:3000/qrcode')
-    const jsonResponse = await responseproduct.json()
-    console.log(jsonResponse)
-
-    setProduct(jsonResponse)
-
-  }, [])
+  const [categories, setCategorie] = useState(null);
 
   var produits = [
    {
      name: 'Leffe',
      price: 3.50,
      quantity: 0,
-     tva: 25,
+     litre: 33,
    },
    {
     name: 'Desperados',
@@ -80,7 +72,7 @@ function Menu(props)  {
     quantity: 0,
     litre: 25,
    },
-
+   
   ];
 
   var produitsTwo = [
@@ -105,14 +97,36 @@ function Menu(props)  {
    ];
 
   var categoriesData = [
-    {name: 'Bières', img: require('../assets/images/biere.jpg'), produits: produits},
-    {name: 'Cocktails', img: require('../assets/images/cocktail.jpg'), produits: produitsTwo},
-    {name: 'Shooters', img: require('../assets/images/shooters.jpg')},
-    {name: 'Softs', img: require('../assets/images/soft.jpg')},
-    {name: 'Vins', img: require('../assets/images/vins.jpg')}
+    {name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: produits},
+    {name: 'Cocktails', img: require(`../assets/images/cocktail.jpg`), produits: produitsTwo},
+    {name: 'Shooters', img: require(`../assets/images/shooters.jpg`)},
+    {name: 'Softs', img: require(`../assets/images/soft.jpg`)},
+    {name: 'Vins', img: require(`../assets/images/vins.jpg`)}
   ];
 
+  useEffect(() => {
+    var loadMenu = async () => {
+      const dataTable = await fetch('http://10.2.5.247:3000/load-menu', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `restoToken=${props.displayTokenResto}`
+      })
+
+      var myResponse = await dataTable.json();
+
+      if (myResponse.allMenu !== undefined) {
+        console.log('myResponse.allMenu :', myResponse.allMenu);
+        setCategorie(myResponse.allMenu)
+        //Une categorie doit imperativement être disposée de la manière suivante:
+        //{name: 'Bières', img: require(`../assets/images/biere.jpg`), produits: [{name: xx, price: xx, quantity: xx, litre: xx}] },
+        props.addTokenTable(props.tableToken);
+      }
+    }
+    loadMenu();
+  }, []);
+
   const [produitsData, setProduitsData] = useState(categoriesData[0].produits);
+
 
   // console.log('produitsDataTT :', produitsData);
   // console.log('props.displayPanier :', props.displayPanier.quantity);
@@ -143,21 +157,21 @@ function Menu(props)  {
   if (props.displayPanier[0]) {
     var boutonPanier = <Bouton title='PANIER' destination='Panier' />
   } else {
-    var boutonPanier = <View style={{height: hp('12%')}}></View>
+    var boutonPanier = <View style={{height: hp('11%')}}></View>
   }
 
   return (
     <View style={styles.container}>
 
-  <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.categorieList}>
-    {categorieList}
-  </ScrollView>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.categorieList}>
+        {categorieList}
+      </ScrollView>
 
-  <ScrollView showsHorizontalScrollIndicator={false} style={styles.produitList}>
-    {produitList}
-  </ScrollView>
+      <ScrollView showsHorizontalScrollIndicator={false} style={styles.produitList}>
+        {produitList}
+      </ScrollView>
 
-  <View style={styles.bouton}>
+      <View style={styles.bouton}>
 
        {boutonPanier}
       </View>
