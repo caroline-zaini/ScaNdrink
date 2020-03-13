@@ -49,7 +49,7 @@ function Scan(props) {
 
     // Passage au menu après 
     if(scanned == true){
-      // props.navigation.navigate('Menu')
+      props.navigation.navigate('Menu')
     }
      
   if (hasPermission === null) {
@@ -81,7 +81,7 @@ function Scan(props) {
 
       <View style={styles.buttom}>
 
-      <Bouton title='Menu' destination='Menu'/>
+      {/* <Bouton title='Menu' destination='Menu'/> */}
       <Bouton style={{color:'red'}} title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>
 
       </View>

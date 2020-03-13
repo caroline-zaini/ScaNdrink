@@ -84,17 +84,17 @@ function SuiviCommande({sendUserId}) {
 
         <ProgressSteps>
 
-            <ProgressStep label="Commande reçue" >
+            <ProgressStep label="Commande reçue" nextBtnTextStyle={styles.buttonTextStyle} >
                 <View style={{ alignItems: 'center' }}>
                 </View>
              </ProgressStep>
 
-            <ProgressStep label="En cours de préparation">
+            <ProgressStep label="En cours de préparation" nextBtnTextStyle={styles.buttonTextStyle} previousBtnTextStyle={styles.buttonTextStyle}>
                 <View style={{ alignItems: 'center' }}>
                 </View>
             </ProgressStep>
 
-            <ProgressStep label="Commande prête">
+            <ProgressStep label="Commande prête" previousBtnTextStyle={styles.buttonTextStyle} submitBtnTextStyle={styles.buttonTextStyle}>
                 <View style={{ alignItems: 'center' }}>
                 </View>
             </ProgressStep>
@@ -127,6 +127,10 @@ function SuiviCommande({sendUserId}) {
       alignItems: 'center',
       justifyContent: 'center',
     },
+    buttonTextStyle : {
+      // display:'none'
+      color:'white'
+    }
   });
 
   function mapStateToProps(state) {

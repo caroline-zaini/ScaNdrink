@@ -143,7 +143,7 @@ function Menu(props)  {
   if (props.displayPanier[0]) {
     var boutonPanier = <Bouton title='PANIER' destination='Panier' />
   } else {
-    var boutonPanier = <View style={{height: hp('11%')}}></View>
+    var boutonPanier = <View style={{height: hp('12%')}}></View>
   }
 
   return (
